@@ -247,11 +247,11 @@ export default {
         padding: 12px;
         & > p {
             @include main.text-main();
-            color: main.$main-text-900;
+            color: main.$text-main-900;
         }
         & > span {
             @include main.text-sub();
-            color: main.$sub-text-500;
+            color: main.$text-sub-500;
             margin-top: -.75rem;
         }
     }
@@ -265,11 +265,11 @@ export default {
         gap: .75rem;
         & > p {
             @include main.text-main();
-            color: main.$main-text-900;
+            color: main.$text-main-900;
         }
         & > span {
             @include main.text-sub();
-            color: main.$sub-text-500;
+            color: main.$text-sub-500;
             margin-top: -1.5rem;
             margin-left: -.5rem;
         }
@@ -283,7 +283,7 @@ export default {
         margin-left: -.5rem;
         & > p {
             @include main.text-main();
-            color: main.$main-text-900;
+            color: main.$text-main-900;
         }
     }
 
@@ -359,7 +359,7 @@ export default {
         cursor: pointer;
         & > p {
             @include main.text-main();
-            color: main.$sub-text-500;
+            color: main.$text-sub-500;
         }
     }
 
@@ -373,7 +373,7 @@ export default {
         cursor: pointer;
         & > p {
             @include main.text-main();
-            color: main.$sub-text-500;
+            color: main.$text-sub-500;
         }
         & > svg:nth-of-type(2) {
             padding-right: 16px;
@@ -399,7 +399,7 @@ export default {
         background-color: main.$bg-weak-100;
         border-radius: 8px;
         & > p {
-            color: main.$main-text-900;
+            color: main.$text-main-900;
         }
     }
 

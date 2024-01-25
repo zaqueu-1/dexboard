@@ -52,7 +52,6 @@ export default {
 
 .header-container {
     background-color: white;
-    padding: 20px;
     text-align: center;
     height: 88px;
     width: calc(100% - 340px);
@@ -80,11 +79,11 @@ export default {
     }
     p:first-child {
         @include main.text-header();
-        color: main.$main-text-900;
+        color: main.$text-main-900;
     }
     p:last-child {
         @include main.text-header-sub();
-        color: main.$sub-text-500;
+        color: main.$text-sub-500;
     }
 }
 
@@ -113,10 +112,11 @@ export default {
     border: 1px solid #E2E4E9;
     border-radius: 10px;
     width: 124px;
+    height: 40px;
     cursor: pointer;
     p {
         @include main.text-main();
-        color: main.$sub-text-500;
+        color: main.$text-sub-500;
     }
 }
 
@@ -129,6 +129,7 @@ export default {
     border: none;
     border-radius: 10px;
     width: 161px;
+    height: 40px;
     background-color: main.$color-primary-base;
     cursor: pointer;
     p {

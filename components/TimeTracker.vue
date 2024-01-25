@@ -91,22 +91,35 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+
 export default {
-    data() {
-        return {
-            records: [],
-            recording: false,
-        }
+    name: 'TimeTracker',
+    components: {
+
     },
-    methods: {
-        handleRecord(type) {
-            this.recording = !this.recording
+    props: {
+
+    },
+    setup() {
+        let records = ref([])
+        let recording = ref(false)
+
+        const handleRecord = (type) => {
+            recording.value = !recording.value
 
             if (type === 'stop') {
-                this.records.push(1)
+                records.value.push(1)
             }
         }
-    }
+
+        return {
+            records,
+            recording,
+            handleRecord
+        }
+    },
+
 }
 </script>
 
@@ -114,15 +127,7 @@ export default {
 @use 'assets/scss/main';
 
 .tracker-container {
-    width: 352px;
-    height: 380px;
-    border: 1px solid #E2E4E9;
-    border-radius: 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    @include main.tall-container();
 }
 
 .tracker-header {
@@ -133,23 +138,22 @@ export default {
     margin-top: -.5rem;
     p {
         @include main.text-header();
-        color: main.$main-text-900;
+        color: main.$text-main-900;
     }
     .historic-btn {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: .5rem;
-        height: 20px;
+        height: 32px;
         width: 104px;
-        padding: 6px 6px 6px 8px;
         border-radius: 8px;
         border: 1px solid main.$soft-200;
         background-color: white;
         cursor: pointer;
         p {
             @include main.text-main();
-            color: main.$sub-text-500;
+            color: main.$text-sub-500;
         }
     }
 
@@ -160,7 +164,7 @@ export default {
         gap: .5rem;
         p {
             @include main.text-main();
-            color: main.$sub-text-500;
+            color: main.$text-sub-500;
         }
     
     }
@@ -182,7 +186,7 @@ export default {
     border-radius: 16px 16px 0 0;
     p {
         @include main.text-main();
-        color: main.$sub-text-500;
+        color: main.$text-sub-500;
     }
 }
 
@@ -211,7 +215,7 @@ export default {
     margin-top: -2.5rem;
     p {
         @include main.text-main();
-        color: main.$main-text-900;
+        color: main.$text-main-900;
         font-size: 40px;
         line-height: 48px;
         letter-spacing: -1%;
@@ -236,7 +240,7 @@ export default {
     }
     p {
         @include main.text-soft();
-        color: main.$main-text-900;
+        color: main.$text-main-900;
         &:last-of-type {
             color: main.$color-primary-base
         }
@@ -277,13 +281,13 @@ export default {
         p {
             margin-top: 0;
             @include main.text-main();
-            color: main.$main-text-900;
+            color: main.$text-main-900;
             font-weight: 400;
         }
         span {
             @include main.text-main();
             font-weight: 400;
-            color: main.$sub-text-500;
+            color: main.$text-sub-500;
             font-size: 12px;
             line-height: 16px;
             margin-top: -.75rem;

@@ -39,11 +39,44 @@
     letter-spacing: -0.6%;
 }
 
-$main-text-900: #0A0D14;
+@mixin divider() {
+    height: 1px;
+    width: 320px;
+    background-color: $soft-200;
+}
+
+@mixin tall-container() {
+    width: 352px;
+    height: 380px;
+    border: $border-component;
+    border-radius: 16px;
+    padding: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@mixin small-container() {
+    width: 352px;
+    height: 178px;
+    border: $border-component;
+    border-radius: 16px;
+    padding: 16px 2px 0 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 $soft-200: #E2E4E9;
 $soft-400: #868C98;
-$sub-text-500: #525866;
+
+$text-main-900: #0A0D14;
+$text-sub-500: #525866;
+$text-disabled-300: #CDD0D5; 
 
 $bg-weak-100: #F6F8FA; 
 
 $color-primary-base: #FF4A00;
+$border-component: 1px solid $soft-200;

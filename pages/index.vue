@@ -1,33 +1,53 @@
 <template>
-    <div class="apps-container">
-        <TimeTracker />
-        <div>
-            <DailyHours />
-            <CoursesProgress />
+    <div class="apps-main">
+        <Header />
+        <div class="apps-container">
+            <TimeTracker />
+            <div class="small-components">
+                <DailyHours />
+                <CoursesProgress />
+            </div>
+            <Collaborators />
         </div>
     </div>
 </template>
 
 <script>
 
+
 </script>
 
 <style lang="scss" scoped>
 @use 'assets/scss/main';
 
-.apps-container {
-    background-color: white;
-    padding: 20px;
-    text-align: center;
-    height: calc(100% - 88px);
-    width: calc(100% - 340px);
-    padding: 0 32px;
+.apss-main {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    justify-self: flex-end;
+    width: calc(100% - 340px);
+    overflow-y: scroll;
+}
+
+.apps-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 16px;
+    padding: .5rem 0;
+    flex-wrap: wrap;
+    width: calc(100% - 272px);
+    height: 100vh;
     position: fixed;
-    bottom: 0;
+    top: 88px;
     right: 0;
+}
+
+.small-components {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
 }
 </style>
