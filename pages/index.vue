@@ -7,7 +7,8 @@
                 <DailyHours />
                 <CoursesProgress />
             </div>
-            <Collaborators />
+            <!--Collaborators /-->
+            <Feedback />
         </div>
     </div>
 </template>
@@ -47,7 +48,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 16px;
+    justify-content: space-between;
+    height: 412px;
 }
 </style>

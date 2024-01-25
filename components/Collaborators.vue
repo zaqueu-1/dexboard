@@ -77,17 +77,16 @@
                 <p>Sem registros do destaque do funcionário ainda. Por favor, verifique mais tarde.</p>
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
-import IconNoCollabs from './IconNoCollabs.vue'
-import IconCollabsUser from './IconCollabsUser.vue'
-import IconPrizes from './IconPrizes.vue'
-import IconUserJames from './IconUserJames.vue'
-import IconUserJuma from './IconUserJuma.vue'
-import IconUserLena from './IconUserLena.vue'
+import IconNoCollabs from './icons/IconNoCollabs.vue'
+import IconCollabsUser from './icons/IconCollabsUser.vue'
+import IconPrizes from './icons/IconPrizes.vue'
+import IconUserJames from './icons/IconUserJames.vue'
+import IconUserJuma from './icons/IconUserJuma.vue'
+import IconUserLena from './icons/IconUserLena.vue'
 import { ref } from 'vue'
 
 export default {
@@ -95,6 +94,10 @@ export default {
     components: {
     IconNoCollabs,
     IconCollabsUser,
+    IconPrizes,
+    IconUserJames,
+    IconUserJuma,
+    IconUserLena
 },
     props: {
 

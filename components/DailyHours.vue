@@ -188,7 +188,6 @@ export default {
     }
 }
 
-
 .divider {
     @include main.divider();
     margin-top: .5rem;
