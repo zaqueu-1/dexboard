@@ -7,7 +7,7 @@
                 </svg>
                 <p>Destaque colaboradores</p>
             </div>
-            <div class="send-btn">
+            <div v-if="option != ''" class="send-btn">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.75 11.5H9.25C8.0197 11.4995 6.81267 11.8354 5.75941 12.4712C4.70614 13.107 3.8467 14.0186 3.274 15.1075C3.2579 14.9054 3.2499 14.7027 3.25 14.5C3.25 10.3577 6.60775 7 10.75 7V2.875L18.625 9.25L10.75 15.625V11.5ZM9.25 10H12.25V12.481L16.2408 9.25L12.25 6.019V8.5H10.75C9.88769 8.49903 9.03535 8.68436 8.25129 9.04332C7.46724 9.40227 6.76999 9.92637 6.20725 10.5798C7.17574 10.1959 8.20822 9.99919 9.25 10Z" fill="#525866"/>
                 </svg>
@@ -66,12 +66,11 @@
                     <span>Comment</span>
                 </div>
             </div>
-            <div v-if="option == 'prêmios'" class="collab-app-body-prizes">
-                <p v-if="user">{{ user.name }}</p>
-                <p v-if="user">{{ user.position }}</p>
-                <IconCollabsUser v-if="user" />
-                <IconNoCollabs v-else />
-                <p v-if="user">{{  user.description }}</p>
+            <div v-if="option == 'prêmios'" class="collab-app-body-general">
+                <p>Cartão presente de R$ 50,00</p>
+                <p>Aproveite o prêmio, {{ user.name.slice(0,7) }}!</p>
+                <IconPrizes />
+                <p>Os funcionários do mês recebem recompensas</p>
             </div>
             <div v-if="option == ''" class="collab-app-no-body">
                 <IconNoCollabs />
@@ -85,6 +84,7 @@
 <script>
 import IconNoCollabs from './IconNoCollabs.vue'
 import IconCollabsUser from './IconCollabsUser.vue'
+import IconPrizes from './IconPrizes.vue'
 import IconUserJames from './IconUserJames.vue'
 import IconUserJuma from './IconUserJuma.vue'
 import IconUserLena from './IconUserLena.vue'
@@ -206,19 +206,30 @@ export default {
         cursor: pointer;
     }
 }
-.collab-app-body {
+.collab-app-body-general {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0 16px;
-    height: 248px;
+    height: 300px;
     width: 320px;
-    p {
-        @include main.text-main();
-        color: main.$soft-400;
-        font-size: 11px;
-        line-height: 12px;
-        letter-spacing: 2%;
+    p:first-of-type{
+        @include main.text-header();
+        color: main.$text-main-900;
+        font-size: 18px;
+    }
+    p:nth-of-type(2) {
+        @include main.text-sub();
+        color: main.$text-sub-500;
+        margin-top: -.75rem;
+    }
+    p:nth-of-type(3) {
+        @include main.text-sub();
+        color: main.$text-sub-500;
+        margin-top: 1.25rem;
+    }
+    svg {
+        margin-top: .75rem;
     }
 }
 
@@ -236,6 +247,26 @@ export default {
         font-size: 11px;
         line-height: 12px;
         letter-spacing: 2%;
+    }
+}
+
+.collab-app-no-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    height: 300px;
+    width: 320px;
+    p{
+        @include main.text-header-sub();
+        color: main.$soft-400;
+        text-align: center;
+        margin-top: 2.5rem;
+        height: 40px;
+    }
+    svg {
+        margin: 1.5rem 0 .5rem 0;
     }
 }
 
@@ -275,6 +306,11 @@ export default {
     border-radius: 8px;
     padding: 0 8px;
     margin-top: 1.25rem;
+    cursor: pointer;
+    span {
+        @include main.text-main();
+        color: main.$text-sub-500;
+    }
 }
 
 .divider {
