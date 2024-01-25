@@ -166,12 +166,12 @@
                 </svg>
                 <div v-if="expanded" class="inner-user">
                     <div class="user-verified">
-                        <p>Sophia Williams</p>
+                        <p>{{ user.name }}</p>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.75431 3.81504C7.87834 3.53147 6.92607 3.92591 6.50716 4.74584L6.00355 5.73158C5.94371 5.8487 5.84846 5.94396 5.73133 6.00379L4.7456 6.50741C3.92566 6.92631 3.53123 7.87858 3.81479 8.75456L4.15571 9.80768C4.19621 9.93281 4.19621 10.0676 4.15571 10.1927L3.81479 11.2458C3.53123 12.1218 3.92566 13.0741 4.7456 13.493L5.73133 13.9966C5.84846 14.0564 5.94371 14.1517 6.00355 14.2688L6.50716 15.2546C6.92607 16.0745 7.87834 16.4689 8.75431 16.1854L9.80744 15.8444C9.93256 15.8039 10.0673 15.8039 10.1924 15.8444L11.2456 16.1854C12.1216 16.4689 13.0738 16.0745 13.4928 15.2546L13.9963 14.2688C14.0562 14.1517 14.1514 14.0564 14.2686 13.9966L15.2543 13.493C16.0743 13.0741 16.4687 12.1218 16.1851 11.2458L15.8442 10.1927C15.8037 10.0676 15.8037 9.93281 15.8442 9.80768L16.1851 8.75456C16.4687 7.87858 16.0743 6.92631 15.2543 6.50741L14.2686 6.00379C14.1514 5.94396 14.0562 5.8487 13.9963 5.73158L13.4928 4.74584C13.0738 3.92591 12.1216 3.53147 11.2456 3.81504L10.1924 4.15595C10.0673 4.19645 9.93256 4.19646 9.80744 4.15595L8.75431 3.81504ZM6.72479 9.84849L7.60868 8.96456L9.37644 10.7324L12.912 7.19684L13.7959 8.08072L9.37644 12.5001L6.72479 9.84849Z" fill="#35B9E9"/>
                         </svg>
                     </div>
-                    <span>sophia@jurisoft.com</span>
+                    <span>{{ user.email }}</span>
                 </div>
                 <svg v-if="expanded" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.7958 11.9993L9.08325 8.28682L10.1438 7.22632L14.9168 11.9993L10.1438 16.7723L9.08325 15.7118L12.7958 11.9993Z" fill="#525866"/>
@@ -182,25 +182,53 @@
 </template>
 
 <script>
+import IconAvatar from './icons/IconAvatar.vue'
+import IconJurisoft from './icons/IconJurisoft.vue'
+import IconPink from './icons/IconPink.vue'
+import IconPurple from './icons/IconPurple.vue'
+import IconRed from './icons/IconRed.vue'
+import { ref } from 'vue'
+
 export default {
-    data() {
+    name: 'Sidebar',
+    components: {
+        IconAvatar,
+        IconJurisoft,
+        IconPink,
+        IconPurple,
+        IconRed,
+    },
+    props: {
+
+    },
+    setup() {
+        const selectedItem = ref('')
+        const expanded = ref(true)
+        const user = ref({
+            name: 'Sophia Williams',
+            email: 'sophia@jurisoft.com',
+        })
+
+        const handleSelect = (item) => {
+            if (selectedItem.value == item) {
+                selectedItem.value = ''
+            } else {
+                selectedItem.value = item
+            }
+        }
+
+        const handleExpand = () => {
+            expanded.value = !expanded.value
+        }
+
         return {
-            selectedItem: '',
-            expanded: true,
+            user,
+            selectedItem,
+            expanded,
+            handleSelect,
+            handleExpand,
         }
     },
-    methods: {
-        handleSelect(item) {
-            if (this.selectedItem == item) {
-                this.selectedItem = ''
-            } else {
-                this.selectedItem = item
-            }
-        },
-        handleExpand() {
-            this.expanded = !this.expanded
-        }
-    }
 }
 </script>
 

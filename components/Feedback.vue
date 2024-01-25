@@ -81,7 +81,7 @@ export default {
         }
 
         const handleFeedback = () => {
-            mood.mood.value == 0 ? null : showFeedbacks.value = !showFeedbacks.value
+            mood.mood == 0 ? null : showFeedbacks.value = !showFeedbacks.value
         }
 
         return {

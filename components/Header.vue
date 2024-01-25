@@ -3,8 +3,8 @@
         <div class="header-user-stats">
             <IconAvatar />
             <div class="header-user-stats-texts">
-                <p>Sophia Williams</p>
-                <p>Bem-vinda de volta 👋🏻</p>
+                <p>{{ user.name }}</p>
+                <p>{{ user.gender == 'F' ? 'Bem-vinda de volta 👋🏻': 'Bem-vindo de volta 👋🏻' }}</p>
             </div>
         </div>
 
@@ -35,15 +35,29 @@
 </template>
 
 <script>
-export default {
-    data() {
-        return {
+import IconNotification from './icons/IconNotification.vue'
+import IconAvatar from './icons/IconAvatar.vue'
+import { ref } from 'vue'
 
+export default {
+    name: 'Header',
+    components: {
+        IconNotification,
+        IconAvatar,
+    },
+    props: {
+
+    },
+    setup() {
+        const user = ref({
+            name: 'Sophia Williams',
+            gender: 'F',
+        })
+
+        return {
+            user,
         }
     },
-    methods: {
-
-    }
 }
 </script>
 
@@ -60,7 +74,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     justify-self: flex-end;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
 }

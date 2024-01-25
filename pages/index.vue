@@ -7,7 +7,7 @@
                 <DailyHours />
                 <CoursesProgress />
             </div>
-            <!--Collaborators /-->
+            <Collaborators />
             <Feedback />
         </div>
     </div>
@@ -27,7 +27,9 @@
     align-items: flex-start;
     justify-content: flex-start;
     width: calc(100% - 340px);
+    min-height: 100vh;
     overflow-y: scroll;
+    position: relative;
 }
 
 .apps-container {
@@ -38,10 +40,12 @@
     padding: .5rem 0;
     flex-wrap: wrap;
     width: calc(100% - 272px);
-    height: 100vh;
-    position: fixed;
+    position: absolute;
     top: 88px;
     right: 0;
+    min-height: 100vh;
+    overflow-y: scroll;
+    padding-bottom: 2rem;
 }
 
 .small-components {
