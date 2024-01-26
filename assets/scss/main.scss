@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@mixin text-main() {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.6%;
+}
+
+@mixin text-header() {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1.5%;
+}
+
+@mixin text-soft() {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 4%;
+}
+
+@mixin text-sub() {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+@mixin text-header-sub() {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.6%;
+}
+
+@mixin divider() {
+    height: 1px;
+    width: 320px;
+    background-color: $soft-200;
+}
+
+@mixin small-container() {
+    width: 352px;
+    height: 178px;
+    border: $border-component;
+    border-radius: 16px;
+    padding: 16px 2px 0 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@mixin tall-container() {
+    width: 352px;
+    height: 380px;
+    border: $border-component;
+    border-radius: 16px;
+    padding: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@mixin wide-container() {
+    width: 728px;
+    height: 380px;
+    border: $border-component;
+    border-radius: 16px;
+    padding: 16px 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@mixin details-button() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 84px;
+    border-radius: 8px;
+    border: 1px solid $soft-200;
+    background-color: white;
+    cursor: pointer;
+    span {
+        @include text-main();
+        color: $text-sub-500;
+    }
+}
+
+$soft-200: #E2E4E9;
+$soft-400: #868C98;
+
+$text-main-900: #0A0D14;
+$text-sub-500: #525866;
+$text-disabled-300: #CDD0D5; 
+
+$bg-weak-100: #F6F8FA; 
+
+$color-primary-base: #FF4A00;
+$border-component: 1px solid $soft-200;
