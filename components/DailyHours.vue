@@ -14,29 +14,29 @@
         <div class="divider"></div>
         <div class="daily-app">
             <div class="daily-time">
-                <p>{{ details ? hours : 0 }}</p>
+                <p>{{ showDailyHours ? dailyHours.hours : 0 }}</p>
                 <span>horas</span>
-                <p>{{ details ? minutes : 0 }}</p>
+                <p>{{ showDailyHours ? dailyHours.minutes : 0 }}</p>
                 <span>minutos</span>
                 <span>no</span>
                 <span>total ⏳</span>
             </div>
             <div class="daily-track">
-                <svg :width="details ? 72 : 103" height="10" :viewBox="details ? '0 0 72 10' : '0 0 103 10'" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect :width="details ? 72 : 103" height="10" rx="2" :fill="details ? '#F2AE40' :'#E2E4E9'"/>
+                <svg :width="showDailyHours ? 72 : 103" height="10" :viewBox="showDailyHours ? '0 0 72 10' : '0 0 103 10'" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect :width="showDailyHours ? 72 : 103" height="10" rx="2" :fill="showDailyHours ? '#F2AE40' :'#E2E4E9'"/>
                 </svg>
-                <svg :width="details ? 188 : 103" height="10" :viewBox="details ? '0 0 188 10' : '0 0 103 10'" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect :width="details ? 188 : 103" height="10" rx="2" :fill="details ? '#35B9E9' :'#E2E4E9'"/>
+                <svg :width="showDailyHours ? 188 : 103" height="10" :viewBox="showDailyHours ? '0 0 188 10' : '0 0 103 10'" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect :width="showDailyHours ? 188 : 103" height="10" rx="2" :fill="showDailyHours ? '#35B9E9' :'#E2E4E9'"/>
                 </svg>
-                <svg :width="details ? 48 : 103" :viewBox="details ? '0 0 48 10' : '0 0 103 10'" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect :width="details ? 48 : 103" height="10" rx="2" :fill="details ? '#6E3FF3' :'#E2E4E9'"/>
+                <svg :width="showDailyHours ? 48 : 103" :viewBox="showDailyHours ? '0 0 48 10' : '0 0 103 10'" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect :width="showDailyHours ? 48 : 103" height="10" rx="2" :fill="showDailyHours ? '#6E3FF3' :'#E2E4E9'"/>
                 </svg>
             </div>
             <div class="daily-subtitle">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_2_74058)">
                 <g filter="url(#filter0_d_2_74058)">
-                <circle cx="8" cy="8" r="6" :fill="details ? '#F2AE40' :'#CDD0D5'"/>
+                <circle cx="8" cy="8" r="6" :fill="showDailyHours ? '#F2AE40' :'#CDD0D5'"/>
                 <circle cx="8" cy="8" r="5" stroke="white" stroke-width="2"/>
                 </g>
                 </g>
@@ -55,11 +55,11 @@
                 </clipPath>
                 </defs>
                 </svg>
-                <p :style="details ? 'color:#525866' : ''">Descanso</p>
+                <p :style="showDailyHours ? 'color:#525866' : ''">Descanso</p>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_2_74058)">
                 <g filter="url(#filter0_d_2_74058)">
-                <circle cx="8" cy="8" r="6" :fill="details ? '#35B9E9' :'#CDD0D5'"/>
+                <circle cx="8" cy="8" r="6" :fill="showDailyHours ? '#35B9E9' :'#CDD0D5'"/>
                 <circle cx="8" cy="8" r="5" stroke="white" stroke-width="2"/>
                 </g>
                 </g>
@@ -78,11 +78,11 @@
                 </clipPath>
                 </defs>
                 </svg>
-                <p :style="details ? 'color:#525866' : ''">Ativo</p>
+                <p :style="showDailyHours ? 'color:#525866' : ''">Ativo</p>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_2_74058)">
                 <g filter="url(#filter0_d_2_74058)">
-                <circle cx="8" cy="8" r="6" :fill="details ? '#6E3FF3' :'#CDD0D5'"/>
+                <circle cx="8" cy="8" r="6" :fill="showDailyHours ? '#6E3FF3' :'#CDD0D5'"/>
                 <circle cx="8" cy="8" r="5" stroke="white" stroke-width="2"/>
                 </g>
                 </g>
@@ -101,11 +101,9 @@
                 </clipPath>
                 </defs>
                 </svg>
-                <p :style="details ? 'color:#525866' : ''">Hora extra</p>
+                <p :style="showDailyHours ? 'color:#525866' : ''">Hora extra</p>
             </div>
-
         </div>
-
     </div>
 </template>
 
@@ -118,21 +116,23 @@ export default {
 
     },
     props: {
-
+        dailyHours: {
+            type: Object,
+        },
     },
-    setup() {
-        let hours = ref(12)
-        let minutes = ref(27)
-        let details = ref(false)
+    setup(props) {
+        let showDailyHours = ref(false)
+
+        onMounted(() => {
+            showDailyHours.value = true
+        })
 
         const handleDetails = () => {
-            details.value = !details.value
+            console.log('Clicou para ver os detalhes.')
         }
 
         return {
-            hours,
-            minutes,
-            details,
+            showDailyHours,
             handleDetails,
         }
     },

@@ -5,7 +5,7 @@
         <div class="apps-container">
             <TimeTracker />
             <div class="small-components">
-                <DailyHours />
+                <DailyHours :dailyHours="dailyHours"/>
                 <CoursesProgress :currentCourse="currentCourse" />
             </div>
             <Collaborators :collab="collab" :collabComments="collabComments" @handleLike="handleLike" />
@@ -98,12 +98,18 @@ export default {
             },
         ])
 
+        let dailyHours = ref({
+            hours: 12,
+            minutes: 27,
+        })
+
         return {
             collab,
             collabComments,
             handleLike,
             currentCourse,
             teachers,
+            dailyHours,
         }
     },
 }
