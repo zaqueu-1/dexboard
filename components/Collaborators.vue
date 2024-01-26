@@ -21,43 +21,46 @@
                 <p @click="handleOption('prêmios')" :style="option == 'prêmios' ? 'height:28px;background:white;padding:0 2px;color:#0A0D14' : ''">Prêmios</p>
             </div>
             <div v-if="option == 'geral'" class="collab-app-body-general">
-                <p>{{ user.name }}</p>
-                <p>{{ user.position }}</p>
+                <p>{{ collab.name }}</p>
+                <p>{{ collab.position }}</p>
                 <IconCollabsUser />
-                <p>{{  user.description }}</p>
+                <p>{{  collab.description }}</p>
             </div>
             <div v-if="option == 'comentários'" class="collab-app-body-comments">
                 <div class="comment">
                     <IconUserJames />
                     <div>
-                        <p>{{ comments.users[0] }}</p>
-                        <p>{{ comments.comments[0] }}</p>
+                        <p>{{ collabComments.users[0] }}</p>
+                        <p>{{ collabComments.comments[0] }}</p>
                     </div>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.375 3.125C15.6535 3.125 17.5 4.98311 17.5 7.58446C17.5 12.7872 11.875 15.7601 10 16.875C8.125 15.7601 2.5 12.7872 2.5 7.58446C2.5 4.98311 4.375 3.125 6.625 3.125C8.02 3.125 9.25 3.86824 10 4.61149C10.75 3.86824 11.98 3.125 13.375 3.125Z" fill="#DF1C41"/>
-                    </svg>
+                    <span @click="$emit(`handleLike`,0)">
+                        <IconHeartFull v-if="collabComments.liked[0] == true"/>
+                        <IconHeartEmpty v-else/>
+                    </span>
                 </div>
                 <div class="divider"></div>
                 <div class="comment">
                     <IconUserLena />
                     <div>
-                        <p>{{ comments.users[1] }}</p>
-                        <p>{{ comments.comments[1] }}</p>
+                        <p>{{ collabComments.users[1] }}</p>
+                        <p>{{ collabComments.comments[1] }}</p>
                     </div>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.375 3.125C15.6535 3.125 17.5 4.98311 17.5 7.58446C17.5 12.7872 11.875 15.7601 10 16.875C8.125 15.7601 2.5 12.7872 2.5 7.58446C2.5 4.98311 4.375 3.125 6.625 3.125C8.02 3.125 9.25 3.86824 10 4.61149C10.75 3.86824 11.98 3.125 13.375 3.125Z" fill="#DF1C41"/>
-                    </svg>
+                    <span @click="$emit(`handleLike`,1)">
+                        <IconHeartFull v-if="collabComments.liked[1] == true"/>
+                        <IconHeartEmpty v-else/>
+                    </span>
                 </div>
                 <div class="divider"></div>
                 <div class="comment">
                     <IconUserJuma />
                     <div>
-                        <p>{{ comments.users[2] }}</p>
-                        <p>{{ comments.comments[2] }}</p>
+                        <p>{{ collabComments.users[2] }}</p>
+                        <p>{{ collabComments.comments[2] }}</p>
                     </div>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.0437 16.875L9.6875 16.7185C8.5875 16.0735 7 15.1406 5.55 13.7881C3.525 11.8909 2.5 9.8059 2.5 7.59563C2.5 5.08481 4.3125 3.125 6.625 3.125C7.8 3.125 9.0625 3.68226 10 4.61521C10.9375 3.68226 12.2 3.125 13.375 3.125C15.725 3.125 17.5 5.04724 17.5 7.59563C17.5 9.81216 16.475 11.8909 14.45 13.7881C13 15.1469 11.3438 16.1174 10.3562 16.6934L10.0437 16.875ZM6.625 4.37728C4.9875 4.37728 3.75 5.76104 3.75 7.59563C3.75 9.43021 4.64375 11.221 6.4 12.8677C7.63125 14.0198 9.00625 14.8651 10 15.4474C11.0312 14.8401 12.3813 14.0073 13.6 12.8677C15.3562 11.221 16.25 9.449 16.25 7.59563C16.25 5.74226 15.0125 4.37728 13.375 4.37728C12.1125 4.37728 11.1438 5.24135 10.8813 5.50433L10 6.37466L9.11875 5.50433C8.85 5.24135 7.8875 4.37728 6.625 4.37728Z" fill="#CDD0D5"/>
-                    </svg>
+                    <span @click="$emit(`handleLike`,2)">
+                        <IconHeartFull v-if="collabComments.liked[2] == true"/>
+                        <IconHeartEmpty v-else/>
+                    </span>
                 </div>
                 <div class="comment-btn">
                     <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +71,7 @@
             </div>
             <div v-if="option == 'prêmios'" class="collab-app-body-general">
                 <p>Cartão presente de R$ 50,00</p>
-                <p>Aproveite o prêmio, {{ user.name.slice(0,7) }}!</p>
+                <p>Aproveite o prêmio, {{ collab.name.slice(0,7) }}!</p>
                 <IconPrizes />
                 <p>Os funcionários do mês recebem recompensas</p>
             </div>
@@ -87,6 +90,8 @@ import IconPrizes from './icons/IconPrizes.vue'
 import IconUserJames from './icons/IconUserJames.vue'
 import IconUserJuma from './icons/IconUserJuma.vue'
 import IconUserLena from './icons/IconUserLena.vue'
+import IconHeartFull from './icons/IconHeartFull.vue'
+import IconHeartEmpty from './icons/IconHeartEmpty.vue'
 import { ref } from 'vue'
 
 export default {
@@ -97,38 +102,37 @@ export default {
     IconPrizes,
     IconUserJames,
     IconUserJuma,
-    IconUserLena
+    IconUserLena,
+    IconHeartFull,
+    IconHeartEmpty,
+    IconHeartFull
 },
     props: {
-
+        collab: {
+            type: Object,
+            default: () => {}
+        },
+        collabComments: {
+            type: Object,
+            default: () => {}
+        }
     },
-    setup() {
-        let user = ref({
-            name: 'Matthew Johson',
-            position: 'Engenheiro de Software',
-            description: 'Funcionário de melhor desempenho de dezembro!'
-        })
-
-        let comments = ref({
-            users: ['James Brown', 'Lena Müller', 'Juma Omondi'],
-            comments: ['Parabéns, Matthew! 🔥', 'Ótimo trabalho! 🤗', 'O céu é o limite! ⚡️'],
-            liked: [true, true, false]
-        })
-
+    setup(props) {
         let option = ref('')
+
+        onMounted(() => {
+            props.collab && props.collabComments ? option.value = 'geral' : option.value = ''
+        })
 
         const handleOption = (type) => {
             option.value = type
         }
 
         return {
-            user,
-            comments,
             option,
-            handleOption
+            handleOption,
         }
     },
-
 }
 </script>
 

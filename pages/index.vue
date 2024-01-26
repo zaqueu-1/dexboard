@@ -1,5 +1,6 @@
 <template>
     <div class="apps-main">
+        <Sidebar />
         <Header />
         <div class="apps-container">
             <TimeTracker />
@@ -7,7 +8,7 @@
                 <DailyHours />
                 <CoursesProgress />
             </div>
-            <Collaborators />
+            <Collaborators :collab="collab" :collabComments="collabComments" @handleLike="handleLike"/>
             <CoursesGeneral />
             <Feedback />
         </div>
@@ -15,6 +16,7 @@
 </template>
 
 <script>
+import Sidebar from '@/components/Sidebar.vue'
 import Header from '@/components/Header.vue'
 import TimeTracker from '@/components/TimeTracker.vue'
 import DailyHours from '@/components/DailyHours.vue'
@@ -27,21 +29,39 @@ import { ref } from 'vue'
 export default {
     name: 'index',
     components: {
-        Header,
-        TimeTracker,
-        DailyHours,
-        CoursesProgress,
-        Collaborators,
-        CoursesGeneral,
-        Feedback
-    },
+    Header,
+    TimeTracker,
+    DailyHours,
+    CoursesProgress,
+    Collaborators,
+    CoursesGeneral,
+    Feedback,
+    Sidebar
+},
     props: {
 
     },
     setup() {
+        let collab = ref({
+            name: 'Matthew Johson',
+            position: 'Engenheiro de Software',
+            description: 'Funcionário de melhor desempenho de dezembro!'
+        })
+
+        let collabComments = ref({
+            users: ['James Brown', 'Lena Müller', 'Juma Omondi'],
+            comments: ['Parabéns, Matthew! 🔥', 'Ótimo trabalho! 🤗', 'O céu é o limite! ⚡️'],
+            liked: [true, true, false]
+        })
+
+        const handleLike = (index) => {
+            collabComments.value.liked[index] = !collabComments.value.liked[index]
+        }
 
         return {
-
+            collab,
+            collabComments,
+            handleLike,
         }
     },
 }
