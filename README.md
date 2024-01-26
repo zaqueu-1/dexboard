@@ -7,9 +7,9 @@ O projeto aqui encontrado se trata de um desafio técnico em Vue.js e foi desenv
 ![Nuxtjs](https://img.shields.io/badge/Nuxt-002E3B?style=for-the-badge&logo=nuxtdotjs&logoColor=#00DC82)
 
 ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
-## Demo
+## Deploy
 
-![demo](https://github.com/zaqueu-1/teamzed-next/blob/main/chrome-capture-2022-11-16%20(4).gif)
+https://frontend-case-nu.vercel.app/
 
 ## Instalação de dependências
 Certifique-se de ter o Node instalado em sua máquina. Clone o repositório e, no diretório do projeto, execute um dos seguintes comandos pelo terminal, de acordo com o gerenciador de pacotes de sua preferência:
