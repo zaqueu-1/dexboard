@@ -7,7 +7,7 @@
                 </svg>
                 <p>Cursos - Progresso</p>
             </div>
-            <button v-if="loadCurrentCourse" @click="handleCourses" class="details-btn">
+            <button v-if="loadCurrentCourse" @click="showCourses" class="details-btn">
                 <span>Ver todos</span>
             </button>
         </div>
@@ -24,7 +24,7 @@
             <div class="courses-progress-texts">
                 <p>{{ loadCurrentCourse ? currentCourse.title :'Nenhum curso em andamento' }}</p>
                 <span>{{ loadCurrentCourse ? currentCourse.subtitle :'Não há progresso em nenhum curso ainda. Considere se inscrever em um.' }}</span>
-                <p>{{ loadCurrentCourse ? 'Retomar curso' : 'Inscrever-se' }}</p>
+                <p @click="handleCourses(loadCurrentCourse)">{{ loadCurrentCourse ? 'Retomar curso' : 'Inscrever-se' }}</p>
             </div>
         </div>
     </div>
@@ -50,12 +50,17 @@ export default {
             props.currentCourse ? loadCurrentCourse.value = true : null
         })
 
-        const handleCourses = () => {
-            console.log('clicou para ver os cursos')
+        const handleCourses = (value) => {
+            value == true ? console.log('Clicou para retomar o curso') : console.log('Clicou para se inscrever')
+        }
+
+        const showCourses = () => {
+            console.log('Clicou para ver os cursos')
         }
 
         return {
             handleCourses,
+            showCourses,
             loadCurrentCourse,
         }
     },
