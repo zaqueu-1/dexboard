@@ -6,9 +6,9 @@
             <TimeTracker />
             <div class="small-components">
                 <DailyHours />
-                <CoursesProgress />
+                <CoursesProgress :currentCourse="currentCourse" />
             </div>
-            <Collaborators :collab="collab" :collabComments="collabComments" @handleLike="handleLike"/>
+            <Collaborators :collab="collab" :collabComments="collabComments" @handleLike="handleLike" />
             <CoursesGeneral />
             <Feedback />
         </div>
@@ -58,10 +58,16 @@ export default {
             collabComments.value.liked[index] = !collabComments.value.liked[index]
         }
 
+        let currentCourse = ref({
+            title: 'Diversidade da equipe',
+            subtitle: 'Projetado para promover a inclusividade e perspectivas diversas.',
+        })
+
         return {
             collab,
             collabComments,
             handleLike,
+            currentCourse,
         }
     },
 }

@@ -110,11 +110,9 @@ export default {
     props: {
         collab: {
             type: Object,
-            default: () => {}
         },
         collabComments: {
             type: Object,
-            default: () => {}
         }
     },
     setup(props) {
