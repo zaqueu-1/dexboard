@@ -9,7 +9,7 @@
                 <CoursesProgress :currentCourse="currentCourse" />
             </div>
             <Collaborators :collab="collab" :collabComments="collabComments" @handleLike="handleLike" />
-            <CoursesGeneral />
+            <CoursesGeneral :teachers="teachers" />
             <Feedback />
         </div>
     </div>
@@ -63,11 +63,47 @@ export default {
             subtitle: 'Projetado para promover a inclusividade e perspectivas diversas.',
         })
 
+        let teachers = ref([
+            {
+                name: 'Nuray Aksoy',
+                position: 'Gerente de produto',
+                course: 'Time Management',
+                date: 'Ago 21 - Set 04',
+                progress: '30%',
+                status: 'Em andamento',
+            },
+            {
+                name: 'Arthur Taylor',
+                position: 'CEO',
+                course: 'Leadership Skills',
+                date: 'Ago 02 - Ago 18',
+                progress: '70%',
+                status: 'Em andamento',
+            },
+            {
+                name: 'Lena Müller',
+                position: 'Gerente de marketing',
+                course: 'Diversity Training',
+                date: 'Jun 24 - Jul 03',
+                progress: '100%',
+                status: 'Concluído',
+            },
+            {
+                name: 'Wei Chen',
+                position: 'Gerente de operações',
+                course: 'Efficiency at Work',
+                date: 'Jun 04 - Jul 28',
+                progress: '100%',
+                status: 'Concluído',
+            },
+        ])
+
         return {
             collab,
             collabComments,
             handleLike,
             currentCourse,
+            teachers,
         }
     },
 }

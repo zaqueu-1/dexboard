@@ -7,47 +7,47 @@
                 </svg>
                 <p>Cursos</p>
             </div>
-            <div v-if="users" class="courses-general-input">
+            <div v-if="loadTeachers" class="courses-general-input">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9.25 2.5C12.976 2.5 16 5.524 16 9.25C16 12.976 12.976 16 9.25 16C5.524 16 2.5 12.976 2.5 9.25C2.5 5.524 5.524 2.5 9.25 2.5ZM9.25 14.5C12.1502 14.5 14.5 12.1502 14.5 9.25C14.5 6.349 12.1502 4 9.25 4C6.349 4 4 6.349 4 9.25C4 12.1502 6.349 14.5 9.25 14.5ZM15.6137 14.5532L17.7355 16.6742L16.6742 17.7355L14.5532 15.6137L15.6137 14.5532Z" fill="#868C98"/>
                 </svg>
-                <input type="text" placeholder="Pesquisar cursos..." />
+                <input type="text" @input="handleFilter" placeholder="Pesquisar cursos..." />
             </div>
-            <button v-if="users" class="details-btn">
+            <button v-if="loadTeachers" @click="" class="details-btn">
                 <span>Ver todos</span>
             </button>
         </div>
         <div class="courses-general-app">
-            <div :class="users ? 'courses-general-app-header' : 'courses-general-app-header disabled'">
+            <div :class="loadTeachers ? 'courses-general-app-header' : 'courses-general-app-header disabled'">
                 <p>Professor</p>
                 <p>Nome do curso</p>
                 <p>Progresso</p>
                 <p>Status</p>
                 <p></p>
             </div>
-            <div v-if="users" class="courses-general-app-body" v-for="user in users" :key="user.id">
+            <div v-if="loadTeachers" class="courses-general-app-body" v-for="teacher in filteredTeachers" :key="teacher.id">
                 <div>
-                    <IconUserLena v-if="user.name == 'Lena Müller'" /> 
-                    <IconUserNuray v-if="user.name == 'Nuray Aksoy'" /> 
-                    <IconUserArthur v-if="user.name == 'Arthur Taylor'" />
-                    <IconUserWei v-if="user.name == 'Wei Chen'" />
+                    <IconUserLena v-if="teacher.name == 'Lena Müller'" /> 
+                    <IconUserNuray v-if="teacher.name == 'Nuray Aksoy'" /> 
+                    <IconUserArthur v-if="teacher.name == 'Arthur Taylor'" />
+                    <IconUserWei v-if="teacher.name == 'Wei Chen'" />
                     <div>
-                        <p>{{ user.name }}</p>
-                        <p>{{ user.position.length > 8 ? user.position.slice(0,14)+'...' : user.position }}</p>
+                        <p>{{ teacher.name }}</p>
+                        <p>{{ teacher.position.length > 8 ? teacher.position.slice(0,14)+'...' : teacher.position }}</p>
                     </div>
                 </div>
                 <div>
-                    <p>{{ user.course }}</p>
-                    <p>{{ user.date }}</p>
+                    <p>{{ teacher.course }}</p>
+                    <p>{{ teacher.date }}</p>
                 </div>
                 <div>
-                    <Icon30 v-if="user.progress == '30%'"/>
-                    <Icon70 v-if="user.progress == '70%'"/>
-                    <Icon100 v-if="user.progress == '100%'"/>
+                    <Icon30 v-if="teacher.progress == '30%'"/>
+                    <Icon70 v-if="teacher.progress == '70%'"/>
+                    <Icon100 v-if="teacher.progress == '100%'"/>
                 </div>
                 <div>
-                    <IconConcluded v-if="user.status == 'Concluído'" />
-                    <IconOngoing v-if="user.status == 'Em andamento'" />
+                    <IconConcluded v-if="teacher.status == 'Concluído'" />
+                    <IconOngoing v-if="teacher.status == 'Em andamento'" />
                 </div>
                 <div>
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +55,7 @@
                     </svg>
                 </div>
             </div>
-            <div v-if="!users" class="courses-general-no-body">
+            <div v-if="!loadTeachers" class="courses-general-no-body">
                 <IconNoCourses />
                 <p>Não há registros de cursos ainda.</p> 
                 <p>Por favor, verifique mais tarde.</p>
@@ -93,51 +93,38 @@ export default {
     IconNoCourses,
 },
     props: {
-
-    },
-    setup() {
-        let user = ref([
-            {
-                name: 'Nuray Aksoy',
-                position: 'Gerente de produto',
-                course: 'Time Management',
-                date: 'Ago 21 - Set 04',
-                progress: '30%',
-                status: 'Em andamento',
-            },
-            {
-                name: 'Arthur Taylor',
-                position: 'CEO',
-                course: 'Leadership Skills',
-                date: 'Ago 02 - Ago 18',
-                progress: '70%',
-                status: 'Em andamento',
-            },
-            {
-                name: 'Lena Müller',
-                position: 'Gerente de marketing',
-                course: 'Diversity Training',
-                date: 'Jun 24 - Jul 03',
-                progress: '100%',
-                status: 'Concluído',
-            },
-            {
-                name: 'Wei Chen',
-                position: 'Gerente de operações',
-                course: 'Efficiency at Work',
-                date: 'Jun 04 - Jul 28',
-                progress: '100%',
-                status: 'Concluído',
-            },
-        ])
-
-        let users = ref(null)
-
-        return {
-            users,
+        teachers: {
+            type: Array,
         }
     },
+    setup(props) {
+        let loadTeachers = ref(false)
 
+        onMounted(() => {
+            props.teachers ? loadTeachers.value = true : null
+        })
+
+        const handleTeachers = () => {
+            console.log('clicou para ver todos os professores')
+        }
+
+        let filteredTeachers = ref(props.teachers)
+
+        const handleFilter = (event) => {
+            const searchText = event.target.value.toLowerCase()
+
+            filteredTeachers.value = props.teachers.filter(teacher => {
+                return teacher.course.toLowerCase().includes(searchText)
+            })
+        }
+
+        return {
+            loadTeachers,
+            handleTeachers,
+            filteredTeachers,
+            handleFilter,
+        }
+    },
 }
 </script>
 
