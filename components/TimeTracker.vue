@@ -92,11 +92,12 @@
 
 <script>
 import { ref } from 'vue'
+import IconNoActivity from './icons/IconNoActivity.vue'
 
 export default {
     name: 'TimeTracker',
     components: {
-
+        IconNoActivity,
     },
     props: {
 
@@ -135,7 +136,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     width: 320px;
-    margin-top: -.5rem;
+    margin-top: -.75rem;
     p {
         @include main.text-header();
         color: main.$text-main-900;
@@ -163,8 +164,8 @@ export default {
         justify-content: center;
         gap: .5rem;
         p {
-            @include main.text-main();
-            color: main.$text-sub-500;
+            @include main.text-header();
+            color: main.$text-main-900;
         }
     
     }

@@ -8,14 +8,43 @@
                 <CoursesProgress />
             </div>
             <Collaborators />
+            <CoursesGeneral />
             <Feedback />
         </div>
     </div>
 </template>
 
 <script>
+import Header from '@/components/Header.vue'
+import TimeTracker from '@/components/TimeTracker.vue'
+import DailyHours from '@/components/DailyHours.vue'
+import CoursesProgress from '@/components/CoursesProgress.vue'
+import Collaborators from '@/components/Collaborators.vue'
+import CoursesGeneral from '@/components/CoursesGeneral.vue'
+import Feedback from '@/components/Feedback.vue'
+import { ref } from 'vue'
 
+export default {
+    name: 'index',
+    components: {
+        Header,
+        TimeTracker,
+        DailyHours,
+        CoursesProgress,
+        Collaborators,
+        CoursesGeneral,
+        Feedback
+    },
+    props: {
 
+    },
+    setup() {
+
+        return {
+
+        }
+    },
+}
 </script>
 
 <style lang="scss" scoped>

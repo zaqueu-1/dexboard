@@ -45,6 +45,18 @@
     background-color: $soft-200;
 }
 
+@mixin small-container() {
+    width: 352px;
+    height: 178px;
+    border: $border-component;
+    border-radius: 16px;
+    padding: 16px 2px 0 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 @mixin tall-container() {
     width: 352px;
     height: 380px;
@@ -57,16 +69,32 @@
     justify-content: flex-start;
 }
 
-@mixin small-container() {
-    width: 352px;
-    height: 178px;
+@mixin wide-container() {
+    width: 728px;
+    height: 380px;
     border: $border-component;
     border-radius: 16px;
-    padding: 16px 2px 0 2px;
+    padding: 16px 2px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+}
+
+@mixin details-button() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 84px;
+    border-radius: 8px;
+    border: 1px solid $soft-200;
+    background-color: white;
+    cursor: pointer;
+    span {
+        @include text-main();
+        color: $text-sub-500;
+    }
 }
 
 $soft-200: #E2E4E9;

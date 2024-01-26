@@ -99,6 +99,7 @@ export default {
 
 .feedback-container {
     @include main.tall-container();
+    max-height: 380px;
 }
 
 .feedback-header {
@@ -106,20 +107,19 @@ export default {
     align-items: center;
     justify-content: space-between;
     width: 320px;
-    margin-top: -.5rem;
+    margin-top: -.75rem;
     p {
         @include main.text-header();
         color: main.$text-main-900;
     }
-
     .feedback-header-title {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: .5rem;
         p {
-            @include main.text-main();
-            color: main.$text-sub-500;
+            @include main.text-header();
+            color: main.$text-main-900;
         }
     }
 }

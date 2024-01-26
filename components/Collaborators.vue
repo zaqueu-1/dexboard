@@ -144,7 +144,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     width: 320px;
-    margin-top: -.5rem;
+    margin-top: -.75rem;
     p {
         @include main.text-header();
         color: main.$text-main-900;
@@ -172,15 +172,14 @@ export default {
         justify-content: center;
         gap: .5rem;
         p {
-            @include main.text-main();
-            color: main.$text-sub-500;
+            @include main.text-header();
+            color: main.$text-main-900;
         }
-    
     }
 }
 
 .collab-app {
-    margin-top: 1rem;
+    margin-top: .75rem;
     display: flex;
     flex-direction: column;
     align-items: center;

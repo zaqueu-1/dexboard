@@ -3,13 +3,13 @@
         <div class="courses-progress-header">
             <div class="courses-progress-header-title">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.0562 6.57118L18.3639 5.26348L19.6365 6.53608L18.3288 7.84377C19.621 9.46123 20.2448 11.5121 20.0722 13.5751C19.8995 15.6381 18.9435 17.5567 17.4004 18.9369C15.8574 20.3171 13.8444 21.0541 11.775 20.9964C9.70555 20.9388 7.73671 20.091 6.27283 18.6271C4.80895 17.1633 3.96114 15.1944 3.90353 13.125C3.84592 11.0555 4.58288 9.04259 5.96306 7.49953C7.34323 5.95648 9.26185 5.00045 11.3249 4.8278C13.3879 4.65515 15.4388 5.27898 17.0562 6.57118ZM12 19.2C12.8273 19.2 13.6466 19.037 14.4109 18.7204C15.1753 18.4038 15.8698 17.9398 16.4548 17.3547C17.0398 16.7697 17.5038 16.0752 17.8204 15.3109C18.1371 14.5465 18.3 13.7273 18.3 12.9C18.3 12.0726 18.1371 11.2534 17.8204 10.4891C17.5038 9.72472 17.0398 9.03021 16.4548 8.4452C15.8698 7.86019 15.1753 7.39614 14.4109 7.07953C13.6466 6.76293 12.8273 6.59998 12 6.59998C10.3291 6.59998 8.72671 7.26372 7.54523 8.4452C6.36375 9.62668 5.7 11.2291 5.7 12.9C5.7 14.5708 6.36375 16.1733 7.54523 17.3547C8.72671 18.5362 10.3291 19.2 12 19.2ZM11.1 8.39997H12.9V13.8H11.1V8.39997ZM8.4 2.09998H15.6V3.89998H8.4V2.09998Z" fill="#525866"/>
+                <path d="M20.1 4.8H7.49999C7.0226 4.8 6.56477 4.98964 6.2272 5.32721C5.88964 5.66477 5.69999 6.12261 5.69999 6.6C5.69999 7.07739 5.88964 7.53523 6.2272 7.87279C6.56477 8.21036 7.0226 8.4 7.49999 8.4H20.1V20.1C20.1 20.3387 20.0052 20.5676 19.8364 20.7364C19.6676 20.9052 19.4387 21 19.2 21H7.49999C6.54521 21 5.62954 20.6207 4.95441 19.9456C4.27928 19.2705 3.89999 18.3548 3.89999 17.4V6.6C3.89999 5.64522 4.27928 4.72955 4.95441 4.05442C5.62954 3.37928 6.54521 3 7.49999 3H19.2C19.4387 3 19.6676 3.09482 19.8364 3.2636C20.0052 3.43239 20.1 3.66131 20.1 3.9V4.8ZM5.69999 17.4C5.69999 17.8774 5.88964 18.3352 6.2272 18.6728C6.56477 19.0104 7.0226 19.2 7.49999 19.2H18.3V10.2H7.49999C6.86804 10.201 6.24705 10.0349 5.69999 9.7185V17.4ZM19.2 7.5H7.49999C7.2613 7.5 7.03238 7.40518 6.8636 7.2364C6.69482 7.06761 6.59999 6.83869 6.59999 6.6C6.59999 6.3613 6.69482 6.13239 6.8636 5.9636C7.03238 5.79482 7.2613 5.7 7.49999 5.7H19.2V7.5Z" fill="#525866"/>
                 </svg>
                 <p>Cursos - Progresso</p>
             </div>
-            <div class="details-btn">
-                <p @click="handleLook">Ver todos</p>
-            </div>
+            <button @click="handleLook" class="details-btn">
+                <span>Ver todos</span>
+            </button>
         </div>
         <div class="divider"></div>
         <div class="courses-progress-app">
@@ -73,26 +73,13 @@ export default {
     align-items: center;
     justify-content: space-between;
     width: 320px;
-    margin-top: -.5rem;
+    margin-top: -.75rem;
     p {
         @include main.text-header();
         color: main.$text-main-900;
     }
     .details-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 32px;
-        width: 79px;
-        padding: 0 6px;
-        border-radius: 8px;
-        border: 1px solid main.$soft-200;
-        background-color: white;
-        cursor: pointer;
-        p {
-            @include main.text-main();
-            color: main.$text-sub-500;
-        }
+        @include main.details-button();
     }
 
     .courses-progress-header-title {
@@ -101,16 +88,14 @@ export default {
         justify-content: center;
         gap: .5rem;
         p {
-            @include main.text-main();
-            color: main.$text-sub-500;
+            @include main.text-header();
+            color: main.$text-main-900;
         }
     }
 }
 
-
 .divider {
     @include main.divider();
-    margin-top: .5rem;
 }
 
 .courses-progress-app {

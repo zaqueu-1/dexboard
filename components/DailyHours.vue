@@ -7,9 +7,9 @@
                 </svg>
                 <p>Horas diárias de trabalho</p>
             </div>
-            <div class="details-btn">
-                <p @click="handleDetails">Detalhes</p>
-            </div>
+            <button @click="handleDetails" class="details-btn">
+                <span>Detalhes</span>
+            </button>
         </div>
         <div class="divider"></div>
         <div class="daily-app">
@@ -154,26 +154,14 @@ export default {
     align-items: center;
     justify-content: space-between;
     width: 320px;
-    margin-top: -.5rem;
+    margin-top: -.75rem;
     p {
         @include main.text-header();
         color: main.$text-main-900;
     }
     .details-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 32px;
+        @include main.details-button();
         width: 79px;
-        padding: 0 6px;
-        border-radius: 8px;
-        border: 1px solid main.$soft-200;
-        background-color: white;
-        cursor: pointer;
-        p {
-            @include main.text-main();
-            color: main.$text-sub-500;
-        }
     }
 
     .daily-header-title {
@@ -182,15 +170,14 @@ export default {
         justify-content: center;
         gap: .5rem;
         p {
-            @include main.text-main();
-            color: main.$text-sub-500;
+            @include main.text-header();
+            color: main.$text-main-900;
         }
     }
 }
 
 .divider {
     @include main.divider();
-    margin-top: .5rem;
 }
 
 .daily-app {
