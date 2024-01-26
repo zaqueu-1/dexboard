@@ -1,7 +1,7 @@
 <template>
     <div class="apps-main">
-        <Sidebar />
-        <Header />
+        <Sidebar :currentUser="currentUser" />
+        <Header :currentUser="currentUser" />
         <div class="apps-container">
             <TimeTracker :previousTasks="previousTasks" @addTask="addTask" />
             <div class="small-components">
@@ -42,6 +42,12 @@ export default {
 
     },
     setup() {
+        let currentUser = ref({
+            name: 'Sophia Williams',
+            email: 'sophia@jurisoft.com',
+            gender: 'F',
+        })
+
         let collab = ref({
             name: 'Matthew Johson',
             position: 'Engenheiro de Software',
@@ -121,6 +127,7 @@ export default {
         }
 
         return {
+            currentUser,
             collab,
             collabComments,
             handleLike,
