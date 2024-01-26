@@ -10,7 +10,7 @@
         </div>
         <div class="feedback-app">
             <div class="divider"></div>
-            <div v-if="!showFeedbacks" class="feedback-app-body">
+            <div v-if="showFeedbacks" class="feedback-app-body">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="40" height="40" rx="20" fill="#FEF3EB"/>
                 <path d="M20 29C15.0293 29 11 24.9707 11 20C11 15.0293 15.0293 11 20 11C24.9707 11 29 15.0293 29 20C29 24.9707 24.9707 29 20 29ZM20 27.2C21.9096 27.2 23.7409 26.4414 25.0912 25.0912C26.4414 23.7409 27.2 21.9096 27.2 20C27.2 18.0904 26.4414 16.2591 25.0912 14.9088C23.7409 13.5586 21.9096 12.8 20 12.8C18.0904 12.8 16.2591 13.5586 14.9088 14.9088C13.5586 16.2591 12.8 18.0904 12.8 20C12.8 21.9096 13.5586 23.7409 14.9088 25.0912C16.2591 26.4414 18.0904 27.2 20 27.2ZM15.5 20H17.3C17.3 20.7161 17.5845 21.4028 18.0908 21.9092C18.5972 22.4155 19.2839 22.7 20 22.7C20.7161 22.7 21.4028 22.4155 21.9092 21.9092C22.4155 21.4028 22.7 20.7161 22.7 20H24.5C24.5 21.1935 24.0259 22.3381 23.182 23.182C22.3381 24.0259 21.1935 24.5 20 24.5C18.8065 24.5 17.6619 24.0259 16.818 23.182C15.9741 22.3381 15.5 21.1935 15.5 20Z" fill="#FF4A00"/>
@@ -35,7 +35,7 @@
                     </span>
                 </div>
                 <textarea name="mood" id="mood" v-model="mood.comment" cols="30" rows="10" placeholder="Adicionar comentário..."></textarea>
-                <button @click="handleFeedback" :disabled="mood.mood == 0" class="send-btn">
+                <button @click="handleFeedback" :disabled="mood.mood == 0 || !mood.comment" class="send-btn">
                     <span>Enviar</span>
                 </button>
             </div>
@@ -71,9 +71,14 @@ export default {
     },
     setup() {
         let showFeedbacks = ref(false)
+
         let mood = ref({
             mood: 0,
             comment: ''
+        })
+
+        onMounted(() => {
+            showFeedbacks.value = true
         })
 
         const handleMood = (number) => {
@@ -81,7 +86,8 @@ export default {
         }
 
         const handleFeedback = () => {
-            mood.mood == 0 ? null : showFeedbacks.value = !showFeedbacks.value
+            console.log('Enviou feedback:', mood.value, 'comentário:', mood.value.comment)
+            mood.value = { ...mood, mood: 0, comment: ''}
         }
 
         return {
