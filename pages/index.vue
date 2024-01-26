@@ -3,7 +3,7 @@
         <Sidebar />
         <Header />
         <div class="apps-container">
-            <TimeTracker />
+            <TimeTracker :previousTasks="previousTasks" @addTask="addTask" />
             <div class="small-components">
                 <DailyHours :dailyHours="dailyHours"/>
                 <CoursesProgress :currentCourse="currentCourse" />
@@ -103,6 +103,23 @@ export default {
             minutes: 27,
         })
 
+        let previousTasks = ref([
+            {
+                icon: 'loom',
+                title: 'Alinhamento - Comercial',
+                time: '1:23:05'
+            },
+            {
+                icon: 'evernote',
+                title: 'Dashboard - Redesign',
+                time: '3:14:26'
+            },
+        ])
+
+        const addTask = (task) => {
+            previousTasks.value.unshift(task)
+        }
+
         return {
             collab,
             collabComments,
@@ -110,6 +127,8 @@ export default {
             currentCourse,
             teachers,
             dailyHours,
+            previousTasks,
+            addTask,
         }
     },
 }

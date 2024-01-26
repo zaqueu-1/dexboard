@@ -7,7 +7,7 @@
                 </svg>
                 <p>Rastreador de tempo</p>
             </div>
-            <div v-if="records.length > 0" class="historic-btn">
+            <div v-if="loadTasks" class="historic-btn">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 2.5C14.1423 2.5 17.5 5.85775 17.5 10C17.5 14.1423 14.1423 17.5 10 17.5C5.85775 17.5 2.5 14.1423 2.5 10H4C4 13.3135 6.6865 16 10 16C13.3135 16 16 13.3135 16 10C16 6.6865 13.3135 4 10 4C7.9375 4 6.118 5.04025 5.03875 6.625H7V8.125H2.5V3.625H4V5.5C5.368 3.6775 7.54675 2.5 10 2.5ZM10.75 6.25V9.68875L13.1823 12.121L12.121 13.1823L9.25 10.3098V6.25H10.75Z" fill="#525866"/>
                 </svg>
@@ -26,62 +26,46 @@
             <div class="tracker-app-body">
                 <p>AGUARDANDO</p>
                 <div class="timer">
-                    <p>00:00</p>
-                    <p>:00</p>
+                    <p>{{ hours < 10 ? '0'+hours : hours }}</p>
+                    <p>:{{ minutes < 10 ? '0'+minutes : minutes }}</p>
+                    <p>:{{ seconds < 10 ? '0'+seconds : seconds }}</p>
                 </div>
                 <div v-if="!recording" class="additional-btns">
                     <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12.9256 8.24962L6.56618 12.4892C6.521 12.5193 6.46851 12.5365 6.41431 12.5391C6.36011 12.5417 6.30622 12.5296 6.25837 12.5039C6.21053 12.4783 6.17054 12.4402 6.14264 12.3937C6.11475 12.3471 6.1 12.2939 6.09998 12.2396V3.76042C6.1 3.70615 6.11475 3.65291 6.14264 3.60636C6.17054 3.55982 6.21053 3.52171 6.25837 3.49609C6.30622 3.47048 6.36011 3.45832 6.41431 3.46091C6.46851 3.46351 6.521 3.48075 6.56618 3.51082L12.9256 7.75042C12.9667 7.77781 13.0004 7.81493 13.0237 7.85847C13.047 7.90201 13.0591 7.95063 13.0591 8.00002C13.0591 8.0494 13.047 8.09802 13.0237 8.14156C13.0004 8.1851 12.9667 8.22222 12.9256 8.24962Z" fill="#FF4A00"/>
                     </svg>
-                    <p style="color:#DF1C41;cursor:pointer;" @click="handleRecord('start')">Iniciar</p>
+                    <p style="color:#DF1C41;cursor:pointer;" @click="startTimer">Iniciar</p>
                 </div>
                 <div v-if="recording"  class="additional-btns">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8 14C4.6862 14 2 11.3138 2 8C2 4.6862 4.6862 2 8 2C11.3138 2 14 4.6862 14 8C14 11.3138 11.3138 14 8 14ZM6.2 6.2V9.8H7.4V6.2H6.2ZM8.6 6.2V9.8H9.8V6.2H8.6Z" fill="#0A0D14"/>
                     </svg>
-                    <p>Pausar</p>
+                    <p v-if="!paused" style="cursor:pointer;" @click="pauseTimer">Pausar</p>
+                    <p v-else style="cursor:pointer;" @click="startTimer">Retomar</p>
                     <svg width="1" height="12" viewBox="0 0 1 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <line x1="0.5" y1="12" x2="0.5" stroke="#CDD0D5"/>
                     </svg>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8 14C4.6862 14 2 11.3138 2 8C2 4.6862 4.6862 2 8 2C11.3138 2 14 4.6862 14 8C14 11.3138 11.3138 14 8 14ZM6.2 6.2V9.8H9.8V6.2H6.2Z" fill="#DF1C41"/>
                     </svg>
-                    <p style="cursor:pointer;" @click="handleRecord('stop')">Parar</p>
+                    <p style="cursor:pointer;" @click="stopTimer">Parar</p>
                 </div>
             </div>
-            <div v-if="records.length > 0" class="tracker-app-activities">
+            <div v-if="loadTasks && previousTasks.length > 0" class="tracker-app-activities">
                 <p>TAREFAS ANTERIORES</p>
-                <div class="activity">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" fill="white"/>
-                    <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" stroke="#E2E4E9"/>
-                    <path d="M29.75 18.9164H24.0476L28.9867 16.0652L27.9017 14.1848L22.964 17.0374L25.8138 12.0983L23.9348 11.0133L21.0864 15.951V10.25H18.9136V15.9524L16.0638 11.0133L14.1862 12.0983L17.036 17.036L12.0983 14.1862L11.0133 16.0638L15.9524 18.915H10.25V21.0836H15.951L11.0133 23.9348L12.0983 25.8152L17.036 22.964L14.1848 27.9017L16.0652 28.9867L18.915 24.0476V29.75H21.0836V24.0476L23.9348 28.9867L25.8138 27.9017L22.9626 22.9626L27.9003 25.8138L28.9853 23.9348L24.0476 21.085H29.7486L29.75 18.9164ZM20 22.9501C19.2146 22.9501 18.4614 22.6381 17.9061 22.0828C17.3508 21.5274 17.0388 20.7742 17.0388 19.9889C17.0388 19.2035 17.3508 18.4503 17.9061 17.895C18.4614 17.3396 19.2146 17.0276 20 17.0276C20.7854 17.0276 21.5386 17.3396 22.0939 17.895C22.6492 18.4503 22.9612 19.2035 22.9612 19.9889C22.9612 20.7742 22.6492 21.5274 22.0939 22.0828C21.5386 22.6381 20.7854 22.9501 20 22.9501Z" fill="#625DF5"/>
-                    </svg>
+                <div class="activity" v-for="task in previousTasks.slice(0,2)" :key="task.id">
+                    <IconLoom v-if="task.icon == 'loom'"/>
+                    <IconEvernote v-if="task.icon == 'evernote'"/>
                     <div class="activity-inner">
-                        <p>Alinhamento - Comercial</p>
-                        <span>1:23:05</span>
-                    </div>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 3.25C9.38125 3.25 8.875 3.75625 8.875 4.375C8.875 4.99375 9.38125 5.5 10 5.5C10.6187 5.5 11.125 4.99375 11.125 4.375C11.125 3.75625 10.6187 3.25 10 3.25ZM10 14.5C9.38125 14.5 8.875 15.0063 8.875 15.625C8.875 16.2437 9.38125 16.75 10 16.75C10.6187 16.75 11.125 16.2437 11.125 15.625C11.125 15.0063 10.6187 14.5 10 14.5ZM10 8.875C9.38125 8.875 8.875 9.38125 8.875 10C8.875 10.6188 9.38125 11.125 10 11.125C10.6187 11.125 11.125 10.6188 11.125 10C11.125 9.38125 10.6187 8.875 10 8.875Z" fill="#525866"/>
-                    </svg>
-                </div>
-                <div class="activity">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" fill="white"/>
-                    <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" stroke="#E2E4E9"/>
-                    <circle cx="20" cy="20" r="10.5" fill="#00A82D"/>
-                    <path d="M17.525 16.2833C17.525 16.4176 17.5141 16.6415 17.3831 16.787C17.2413 16.9213 17.023 16.9325 16.892 16.9325C16.1553 16.9325 15.1334 16.7473 14.4365 17.0332C15.5 15.125 17.5602 13.857 17.5468 13.9663C17.4487 14.7214 17.525 15.5238 17.525 16.2833ZM19.7295 24.9466C19.7295 24.0176 20.4716 23.2565 21.3883 23.2565C21.6612 23.2565 21.8794 23.4803 21.8794 23.7602C21.8794 23.9504 21.7812 24.1071 21.6284 24.1967C21.462 24.2991 21.2316 24.2513 21.0828 24.387C20.9736 24.4765 20.8863 24.622 20.8863 24.7787C20.8863 24.9466 20.9518 25.1033 21.0609 25.2152C21.2574 25.4167 21.5193 25.5286 21.803 25.5286C22.5452 25.5286 23.1454 24.913 23.1454 24.1519C23.1454 23.4691 22.6979 22.8647 22.1086 22.5961C21.2142 22.1375 19.8458 22.3985 19.7404 20.9619C19.5764 21.7217 19.2145 23.0774 18.2344 23.0774C15.2735 23.2578 14.2063 20.8594 14 18.3204C14 17.7719 14.3274 17.4026 14.7421 17.3466C15.4842 17.3466 16.2263 17.3466 16.9684 17.3466C17.3504 17.3466 17.5687 17.2459 17.7105 17.1116C17.8961 16.9325 17.9397 16.675 17.9397 16.3728C17.9397 15.5856 17.9397 14.375 17.9397 14.0111C17.9397 13.5359 18.3544 13.25 18.8892 13.25C19.2042 13.25 19.4998 13.2611 19.8059 13.3395C20.4716 13.5074 20.6135 14.2014 20.6135 14.2014C20.6135 14.2014 21.8685 14.4253 22.5015 14.5372C23.1017 14.6491 24.5859 14.7499 24.8697 16.2833C25.5354 19.9322 25.1316 23.4691 25.0989 23.4691C24.6296 26.9166 21.8358 26.7487 21.8358 26.7487C20.8202 26.7487 19.7295 26.0556 19.7295 24.9466ZM23.0035 19.0032C22.6434 18.9696 22.3378 19.1151 22.2287 19.3949C22.074 19.7915 23.6692 20.1212 23.6692 19.574C23.6256 19.2606 23.3637 19.0479 23.0035 19.0032Z" fill="white"/>
-                    </svg>
-                    <div class="activity-inner">
-                        <p>Dashboard - Redesign</p>
-                        <span>3:14:26</span>
+                        <p>{{ task.title }}</p>
+                        <span>{{ task.time }}</span>
                     </div>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 3.25C9.38125 3.25 8.875 3.75625 8.875 4.375C8.875 4.99375 9.38125 5.5 10 5.5C10.6187 5.5 11.125 4.99375 11.125 4.375C11.125 3.75625 10.6187 3.25 10 3.25ZM10 14.5C9.38125 14.5 8.875 15.0063 8.875 15.625C8.875 16.2437 9.38125 16.75 10 16.75C10.6187 16.75 11.125 16.2437 11.125 15.625C11.125 15.0063 10.6187 14.5 10 14.5ZM10 8.875C9.38125 8.875 8.875 9.38125 8.875 10C8.875 10.6188 9.38125 11.125 10 11.125C10.6187 11.125 11.125 10.6188 11.125 10C11.125 9.38125 10.6187 8.875 10 8.875Z" fill="#525866"/>
                     </svg>
                 </div>
             </div>
-            <div v-if="records.length <= 0" class="tracker-app-empty">
+            <div v-if="!loadTasks" class="tracker-app-empty">
                 <IconNoActivity />
                 <p>Sem registro de atividades</p>
             </div>
@@ -93,34 +77,88 @@
 <script>
 import { ref } from 'vue'
 import IconNoActivity from './icons/IconNoActivity.vue'
+import IconEvernote from './icons/IconEvernote.vue'
+import IconLoom from './icons/IconLoom.vue'
 
 export default {
     name: 'TimeTracker',
     components: {
-        IconNoActivity,
-    },
+    IconNoActivity,
+    IconEvernote,
+    IconLoom
+},
     props: {
-
+        previousTasks: {
+            type: Array,
+        }
     },
-    setup() {
-        let records = ref([])
+    setup(props, { emit }) {
         let recording = ref(false)
+        let paused = ref(false)
+        let timer = null
+        let seconds = ref(0)
+        let minutes = ref(0)
+        let hours = ref(0)
 
-        const handleRecord = (type) => {
-            recording.value = !recording.value
+        let loadTasks = ref(false)
 
-            if (type === 'stop') {
-                records.value.push(1)
-            }
+        onMounted(() => {
+            props.previousTasks ? loadTasks.value = true : loadTasks.value = false
+        })
+
+        const startTimer = () => {
+            recording.value = true
+            paused.value = false
+
+            timer = setInterval(() => {
+                seconds.value++
+                if (seconds.value === 60) {
+                    seconds.value = 0
+                    minutes.value++
+                    if (minutes.value === 60) {
+                        minutes.value = 0
+                        hours.value++
+                    }
+                }
+            }, 1000)
+        }
+
+        const pauseTimer = () => {
+            recording.value = true
+            paused.value = true
+            clearInterval(timer) 
+        }
+
+        const stopTimer = () => {
+            recording.value = false
+            paused.value = false
+
+            emit('addTask', {
+                id: Math.floor(Math.random() * 1000),
+                icon: `${Math.floor(Math.random() * 2) == 0 ? 'loom' : 'evernote'}`,
+                title: 'Gravação',
+                time: `${hours.value < 10 ? '0'+hours.value : hours.value}:${minutes.value < 10 ? '0'+minutes.value : minutes.value}:${seconds.value < 10 ? '0'+seconds.value : seconds.value}`,
+            })
+
+            clearInterval(timer)
+            seconds.value = 0
+            minutes.value = 0
+            hours.value = 0
         }
 
         return {
-            records,
             recording,
-            handleRecord
+            paused,
+            loadTasks,
+            timer,
+            seconds,
+            minutes,
+            hours,
+            startTimer,
+            stopTimer,
+            pauseTimer,
         }
     },
-
 }
 </script>
 
@@ -271,8 +309,9 @@ export default {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    width: 320px;
-    margin-top: 0;
+    width: 340px;
+    height: 40px;
+    margin-bottom: 5px;
     .activity-inner {
         display: flex;
         flex-direction: column;
