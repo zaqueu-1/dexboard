@@ -13,7 +13,7 @@
                 </svg>
                 <input type="text" @input="handleFilter" placeholder="Pesquisar cursos..." />
             </div>
-            <button v-if="loadTeachers" @click="" class="details-btn">
+            <button v-if="loadTeachers" @click="handleCoursesToEnroll" class="details-btn">
                 <span>Ver todos</span>
             </button>
         </div>
@@ -104,8 +104,8 @@ export default {
             props.teachers ? loadTeachers.value = true : null
         })
 
-        const handleTeachers = () => {
-            console.log('clicou para ver todos os professores')
+        const handleCoursesToEnroll = () => {
+            console.log('Clicou para ver todos os cursos disponíveis')
         }
 
         let filteredTeachers = ref(props.teachers)
@@ -120,7 +120,7 @@ export default {
 
         return {
             loadTeachers,
-            handleTeachers,
+            handleCoursesToEnroll,
             filteredTeachers,
             handleFilter,
         }

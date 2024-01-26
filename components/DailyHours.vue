@@ -124,7 +124,7 @@ export default {
         let showDailyHours = ref(false)
 
         onMounted(() => {
-            showDailyHours.value = true
+            props.dailyHours ? showDailyHours.value = true : showDailyHours.value = false
         })
 
         const handleDetails = () => {
