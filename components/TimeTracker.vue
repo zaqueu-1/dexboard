@@ -53,7 +53,7 @@
             </div>
             <div v-if="loadTasks && previousTasks.length > 0" class="tracker-app-activities">
                 <p>TAREFAS ANTERIORES</p>
-                <div class="activity" v-for="task in previousTasks.slice(0,2)" :key="task.id">
+                <div class="activity" v-for="(task,index) in previousTasks.slice(0,2)" :key="index">
                     <IconLoom v-if="task.icon == 'loom'"/>
                     <IconEvernote v-if="task.icon == 'evernote'"/>
                     <div class="activity-inner">

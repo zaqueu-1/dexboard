@@ -1,16 +1,20 @@
 <template>
-    <div class="apps-main">
+    <div class="apps-container">
         <Sidebar :currentUser="currentUser" />
-        <Header :currentUser="currentUser" />
-        <div class="apps-container">
-            <TimeTracker :previousTasks="previousTasks" @addTask="addTask" />
-            <div class="small-components">
-                <DailyHours :dailyHours="dailyHours"/>
-                <CoursesProgress :currentCourse="currentCourse" />
+        <div class="components">
+            <Header :currentUser="currentUser" />
+            <div class="inner-components">
+                <TimeTracker :previousTasks="previousTasks" @addTask="addTask" />
+                <div class="small-components">
+                    <DailyHours :dailyHours="dailyHours"/>
+                    <CoursesProgress :currentCourse="currentCourse" />
+                </div>
+                <Collaborators :currentUser="currentUser" :collab="collab" :collabComments="collabComments" @handleLike="handleLike" @addComment="addComment" />
             </div>
-            <Collaborators :collab="collab" :collabComments="collabComments" @handleLike="handleLike" />
-            <CoursesGeneral :teachers="teachers" />
-            <Feedback />
+            <div class="inner-components">
+                <CoursesGeneral :teachers="teachers" />
+                <Feedback />
+            </div>
         </div>
     </div>
 </template>
@@ -54,14 +58,26 @@ export default {
             description: 'Funcionário de melhor desempenho de dezembro!'
         })
 
-        let collabComments = ref({
-            users: ['James Brown', 'Lena Müller', 'Juma Omondi'],
-            comments: ['Parabéns, Matthew! 🔥', 'Ótimo trabalho! 🤗', 'O céu é o limite! ⚡️'],
-            liked: [true, true, false]
-        })
+        let collabComments = ref([
+            {
+                user: 'James Brown',
+                comment: 'Parabéns, Matthew! 🔥', 
+                liked: true,
+            },
+            {
+                user: 'Lena Müller',
+                comment: 'Ótimo trabalho! 🤗',
+                liked: true,
+            },
+            {
+                user: 'Juma Omondi',
+                comment: 'O céu é o limite! ⚡️',
+                liked: false,
+            },
+        ])
 
         const handleLike = (index) => {
-            collabComments.value.liked[index] = !collabComments.value.liked[index]
+            collabComments.value[index].liked = !collabComments.value[index].liked
         }
 
         let currentCourse = ref({
@@ -126,6 +142,10 @@ export default {
             previousTasks.value.unshift(task)
         }
 
+        const addComment = (comment) => {
+            collabComments.value.unshift(comment)
+        }
+
         return {
             currentUser,
             collab,
@@ -136,6 +156,7 @@ export default {
             dailyHours,
             previousTasks,
             addTask,
+            addComment,
         }
     },
 }
@@ -144,31 +165,16 @@ export default {
 <style lang="scss" scoped>
 @use 'assets/scss/main';
 
-.apss-main {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: calc(100% - 340px);
-    min-height: 100vh;
-    overflow-y: scroll;
-    position: relative;
-}
-
 .apps-container {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
-    gap: 16px;
-    padding: .5rem 0;
-    flex-wrap: wrap;
-    width: calc(100% - 272px);
+    justify-content: space-between;
     position: absolute;
-    top: 88px;
-    right: 0;
-    min-height: 100vh;
-    overflow-y: scroll;
-    padding-bottom: 2rem;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 .small-components {
@@ -177,5 +183,28 @@ export default {
     align-items: center;
     justify-content: space-between;
     height: 412px;
+    width: 352px ;
+}
+
+.components {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap:wrap;
+    gap: 24px;
+    padding: 0 2rem 4rem 2rem;
+    min-width: 400px;
+    overflow-y: scroll;
+    height: calc(100% - 4rem);
+    scroll-behavior: smooth;
+    width: 100%;
+}
+
+.inner-components {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 24px;
+    width: 100%;
 }
 </style>
