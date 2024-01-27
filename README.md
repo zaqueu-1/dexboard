@@ -1,14 +1,13 @@
 ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
 
 ## Dashboard | Teste Técnico
-
-O projeto aqui encontrado se trata de um desafio técnico em Vue.js e foi desenvolvido com base em requisitos pré-estabelecidos pela empresa. Ele foi realizado utilizando as seguintes tecnologias, conforme a própria documentação do desafio:
+Este projeto se trata de um desafio técnico em Vue.js e foi desenvolvido com base em requisitos pré-estabelecidos pela empresa idealizadora. Ele foi construído utilizando as seguintes tecnologias, conforme a própria documentação do desafio:
 
 ![Nuxtjs](https://img.shields.io/badge/Nuxt-002E3B?style=for-the-badge&logo=nuxtdotjs&logoColor=#00DC82)
 
 ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
-## Deploy
 
+## Deploy
 https://frontend-case-nu.vercel.app/
 
 ## Instalação de dependências
@@ -43,8 +42,11 @@ Abaixo, algumas informações sobre minhas escolhas e tomadas de decisão durant
     - Destaque Colaboradores: na aba de 'Comentários' é possível curtir ou descurtir os comentários. Também é possível adicionar um comentário com o usuário atual, que ficará exibido no topo da lista
     - Cursos: o campo de pesquisa irá filtrar pelo nome do curso. O clique no botão irá imprimir na tela que o usuário deseja visualizar todos os cursos
     - Feedback diário: é possível escolher um mood e adicionar um comentário
-## Autor
 
+## Considerações finais
+Utilizar tanto o Nuxt quanto o SASS foi uma experiência nova para mim, com algumas nuances que diferem da stack que utilizo no trabalho (Vue + Quasar). Fiquei positivamente surpreso pela facilidade com que consegui desenvolver o projeto com apenas algumas lidas na documentação oficial; com certeza é um combo que eu terei todo prazer em usar mais vezes. 
+    
+## Autor
 - [@zaqueu-1](https://www.github.com/zaqueu-1)
 Acesse também meu [LinkedIn](https://linkedin.com/in/zaqueu1) e dê uma olhada em meu [portfolio](https://zaqueu.tech)!
 
