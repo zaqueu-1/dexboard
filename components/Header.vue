@@ -66,24 +66,20 @@ export default {
     background-color: white;
     text-align: center;
     height: 88px;
-    width: calc(100% - 340px);
-    max-width: 1230px;
-    padding: 0 32px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    justify-self: flex-end;
-    position: absolute;
-    top: 0;
-    right: 0;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: -1rem;
 }
 
 .header-user-stats {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
-    min-width: 210px;
+    width: 659px;
+    padding: 0 .25rem;
     p {
         margin: 0;
         font-size: 14px;
@@ -113,7 +109,6 @@ export default {
     align-items: center;
     justify-content: center;
     gap: 1rem;
-
 }
 
 .calendar {
@@ -150,6 +145,5 @@ export default {
         color: white;
     }
 }
-
 
 </style>

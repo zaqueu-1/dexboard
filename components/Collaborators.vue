@@ -7,7 +7,7 @@
                 </svg>
                 <p>Destaque colaboradores</p>
             </div>
-            <div v-if="option != ''" class="send-btn">
+            <div v-if="option != ''" @click="handleComment" class="send-btn">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.75 11.5H9.25C8.0197 11.4995 6.81267 11.8354 5.75941 12.4712C4.70614 13.107 3.8467 14.0186 3.274 15.1075C3.2579 14.9054 3.2499 14.7027 3.25 14.5C3.25 10.3577 6.60775 7 10.75 7V2.875L18.625 9.25L10.75 15.625V11.5ZM9.25 10H12.25V12.481L16.2408 9.25L12.25 6.019V8.5H10.75C9.88769 8.49903 9.03535 8.68436 8.25129 9.04332C7.46724 9.40227 6.76999 9.92637 6.20725 10.5798C7.17574 10.1959 8.20822 9.99919 9.25 10Z" fill="#525866"/>
                 </svg>
@@ -27,46 +27,31 @@
                 <p>{{  collab.description }}</p>
             </div>
             <div v-if="option == 'comentários'" class="collab-app-body-comments">
-                <div class="comment">
-                    <IconUserJames />
-                    <div>
-                        <p>{{ collabComments.users[0] }}</p>
-                        <p>{{ collabComments.comments[0] }}</p>
+                <div v-for="(comment,index) in collabComments.slice(0,3)" :key="index">
+                    <div class="comment">
+                        <IconUserJames v-if="comment.user == 'James Brown'"/>
+                        <IconUserLena v-if="comment.user == 'Lena Müller'" />
+                        <IconUserJuma v-if="comment.user == 'Juma Omondi'" />
+                        <IconAvatar v-if="comment.user == 'Sophia Williams'" />
+                        <div>
+                            <p>{{ comment.user }}</p>
+                            <p>{{ comment.comment}}</p>
+                        </div>
+                        <span @click="$emit(`handleLike`,index)" style="cursor:pointer;">
+                            <IconHeartFull v-if="comment.liked == true"/>
+                            <IconHeartEmpty v-else/>
+                        </span>
                     </div>
-                    <span @click="$emit(`handleLike`,0)">
-                        <IconHeartFull v-if="collabComments.liked[0] == true"/>
-                        <IconHeartEmpty v-else/>
-                    </span>
+                    <div class="divider"></div>
                 </div>
-                <div class="divider"></div>
-                <div class="comment">
-                    <IconUserLena />
-                    <div>
-                        <p>{{ collabComments.users[1] }}</p>
-                        <p>{{ collabComments.comments[1] }}</p>
-                    </div>
-                    <span @click="$emit(`handleLike`,1)">
-                        <IconHeartFull v-if="collabComments.liked[1] == true"/>
-                        <IconHeartEmpty v-else/>
-                    </span>
-                </div>
-                <div class="divider"></div>
-                <div class="comment">
-                    <IconUserJuma />
-                    <div>
-                        <p>{{ collabComments.users[2] }}</p>
-                        <p>{{ collabComments.comments[2] }}</p>
-                    </div>
-                    <span @click="$emit(`handleLike`,2)">
-                        <IconHeartFull v-if="collabComments.liked[2] == true"/>
-                        <IconHeartEmpty v-else/>
-                    </span>
-                </div>
-                <div class="comment-btn">
+                <div @click="handleInput" v-if="!showInput" class="comment-btn">
                     <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.296 8.26456L12.2355 7.20406L5.25 14.1896V15.2501H6.3105L13.296 8.26456ZM14.3565 7.20406L15.417 6.14356L14.3565 5.08306L13.296 6.14356L14.3565 7.20406ZM6.9315 16.7501H3.75V13.5678L13.8263 3.49156C13.9669 3.35096 14.1576 3.27197 14.3565 3.27197C14.5554 3.27197 14.7461 3.35096 14.8868 3.49156L17.0085 5.61331C17.1491 5.75396 17.2281 5.94469 17.2281 6.14356C17.2281 6.34244 17.1491 6.53317 17.0085 6.67381L6.93225 16.7501H6.9315Z" fill="#525866"/>
                     </svg>
                     <span>Comment</span>
+                </div>
+                <div v-else class="comment-btn">
+                    <input type="text" v-model="comment" @keydown.enter="handleComment" placeholder="Digite algo..." />
                 </div>
             </div>
             <div v-if="option == 'prêmios'" class="collab-app-body-general">
@@ -90,6 +75,7 @@ import IconPrizes from './icons/IconPrizes.vue'
 import IconUserJames from './icons/IconUserJames.vue'
 import IconUserJuma from './icons/IconUserJuma.vue'
 import IconUserLena from './icons/IconUserLena.vue'
+import IconAvatar from './icons/IconAvatar.vue'
 import IconHeartFull from './icons/IconHeartFull.vue'
 import IconHeartEmpty from './icons/IconHeartEmpty.vue'
 import { ref } from 'vue'
@@ -103,6 +89,7 @@ export default {
     IconUserJames,
     IconUserJuma,
     IconUserLena,
+    IconAvatar,
     IconHeartFull,
     IconHeartEmpty,
     IconHeartFull
@@ -113,10 +100,15 @@ export default {
         },
         collabComments: {
             type: Object,
-        }
+        },
+        currentUser: {
+            type: Object,
+        },
     },
-    setup(props) {
+    setup(props, { emit }) {
         let option = ref('')
+        let showInput = ref(false)
+        let comment = ref('')
 
         onMounted(() => {
             props.collab && props.collabComments ? option.value = 'geral' : option.value = ''
@@ -126,9 +118,30 @@ export default {
             option.value = type
         }
 
+        const handleInput = () => {
+            showInput.value = true
+        }
+
+        const handleComment = () => {
+            if (comment.value != '') {
+                emit('addComment', {
+                    user: props.currentUser.name,
+                    comment: comment.value,
+                    liked: false,
+                })
+            }
+
+            showInput.value = false
+            comment.value = ''
+        }
+
         return {
             option,
             handleOption,
+            handleInput,
+            handleComment,
+            showInput,
+            comment,
         }
     },
 }
@@ -315,7 +328,17 @@ export default {
         @include main.text-main();
         color: main.$text-sub-500;
     }
+    input {
+        width: 90%;
+        height: 90%;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        line-height: 16px;
+    }
 }
+
+
 
 .divider {
     @include main.divider();

@@ -1,6 +1,6 @@
 <template>
-    <div class="sidebar-container" :style="!expanded ? 'width:80px' : ''">
-        <div class="sidebar-container-header" :style="!expanded ? 'width:80px;justify-content:center;' : ''">
+    <div class="sidebar-container" :style="!expanded ? 'max-width:80px' : ''">
+        <div class="sidebar-container-header" :style="!expanded ? 'max-width:80px;justify-content:center;' : ''">
             <div class="outer-div" @click="handleExpand()">
                 <IconJurisoft />
                 <div v-if="expanded" class="inner-div">
@@ -15,7 +15,7 @@
         <div class="divider" :style="!expanded ? 'max-width:48px' : ''"></div>
         <div class="items-main">
             <p>MAIN</p>
-            <div class="items" :style="!expanded ? 'width:80px': ''">
+            <div class="items" :style="!expanded ? 'max-width:80px': ''">
                 <div :class="expanded && selectedItem == 'dashboard' ? 'item selected' : 'item'" @click="handleSelect('dashboard')">
                     <svg class='selected-icon' v-if="selectedItem == 'dashboard'" width="4" height="20" viewBox="0 0 4 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 0C2.20914 0 4 1.79086 4 4V16C4 18.2091 2.20914 20 0 20V0Z" fill="#FF4A00"/>
@@ -114,7 +114,7 @@
                 </div>
             </div>
         </div>
-        <div class="items-main" :style="!expanded ? 'width:80px;' : ''">
+        <div class="items-main" :style="!expanded ? 'max-width:80px;' : ''">
             <p>FAVS</p>
             <div class="items" :style="!expanded ? 'width:80px;gap:1.5rem;margin-top:1.5rem;margin-left:2rem;' : ''">
                 <div class="favs-items">
@@ -143,7 +143,7 @@
                 </div>
             </div>
         </div>
-        <div class="items-main-bottom" :style="!expanded ? 'width:80px;margin-left:2rem;' : ''">
+        <div class="items-main-bottom" :style="!expanded ? 'max-width:80px;margin-left:2rem;' : ''">
             <div class="item" :style="!expanded ? 'width:80px;' : ''">
                     <svg class='item-icon' width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7.51453 4.00004L9.46979 2.04479C9.61043 1.90418 9.80116 1.8252 10 1.8252C10.1989 1.8252 10.3896 1.90418 10.5303 2.04479L12.4855 4.00004H15.25C15.4489 4.00004 15.6397 4.07905 15.7804 4.21971C15.921 4.36036 16 4.55112 16 4.75004V7.51453L17.9553 9.46979C18.0959 9.61043 18.1749 9.80116 18.1749 10C18.1749 10.1989 18.0959 10.3896 17.9553 10.5303L16 12.4855V15.25C16 15.4489 15.921 15.6397 15.7804 15.7804C15.6397 15.921 15.4489 16 15.25 16H12.4855L10.5303 17.9553C10.3896 18.0959 10.1989 18.1749 10 18.1749C9.80116 18.1749 9.61043 18.0959 9.46979 17.9553L7.51453 16H4.75004C4.55112 16 4.36036 15.921 4.21971 15.7804C4.07905 15.6397 4.00004 15.4489 4.00004 15.25V12.4855L2.04479 10.5303C1.90418 10.3896 1.8252 10.1989 1.8252 10C1.8252 9.80116 1.90418 9.61043 2.04479 9.46979L4.00004 7.51453V4.75004C4.00004 4.55112 4.07905 4.36036 4.21971 4.21971C4.36036 4.07905 4.55112 4.00004 4.75004 4.00004H7.51453ZM5.50003 5.50003V8.13629L3.63629 10L5.50003 11.8638V14.5H8.13629L10 16.3638L11.8638 14.5H14.5V11.8638L16.3638 10L14.5 8.13629V5.50003H11.8638L10 3.63629L8.13629 5.50003H5.50003ZM10 13C9.20438 13 8.44132 12.684 7.87871 12.1214C7.31611 11.5587 7.00003 10.7957 7.00003 10C7.00003 9.20438 7.31611 8.44132 7.87871 7.87871C8.44132 7.31611 9.20438 7.00003 10 7.00003C10.7957 7.00003 11.5587 7.31611 12.1214 7.87871C12.684 8.44132 13 9.20438 13 10C13 10.7957 12.684 11.5587 12.1214 12.1214C11.5587 12.684 10.7957 13 10 13ZM10 11.5C10.3979 11.5 10.7794 11.342 11.0607 11.0607C11.342 10.7794 11.5 10.3979 11.5 10C11.5 9.60221 11.342 9.22068 11.0607 8.93937C10.7794 8.65807 10.3979 8.50003 10 8.50003C9.60221 8.50003 9.22068 8.65807 8.93937 8.93937C8.65807 9.22068 8.50003 9.60221 8.50003 10C8.50003 10.3979 8.65807 10.7794 8.93937 11.0607C9.22068 11.342 9.60221 11.5 10 11.5Z" fill="#525866"/>
@@ -241,15 +241,12 @@ export default {
     .sidebar-container {
         background-color: #FFFFFF;
         border-right: 1px solid #e0e0e0;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: space-between;
         width: 272px;
+        height: 100%;
     }
 
     .sidebar-container-header, .sidebar-container-footer {
@@ -319,20 +316,13 @@ export default {
         }
     }
 
-    .divider {
-        max-width: 232px;
+    .divider, .divider-bottom {
+        @include main.divider();
         width: 100%;
-        height: 1px;
-        background-color: #E2E4E9;
     }
 
     .divider-bottom {
-        max-width: 232px;
-        width: 100%;
-        height: 1px;
-        background-color: #E2E4E9;
-        position: fixed;
-        bottom: 89px;
+        margin-top: 1rem;
     }
 
     .items-main {
@@ -341,6 +331,7 @@ export default {
         align-items: center;
         justify-content: flex-start;
         width: 100%;
+        height: 346px;
         padding: 0 24px;
         & > p {
             @include main.text-soft();
@@ -359,8 +350,6 @@ export default {
         justify-content: flex-start;
         width: 100%;
         padding: 0 24px;
-        position: fixed;
-        bottom: 105px;
         & > p {
             @include main.text-soft();
             color: main.$soft-400;
@@ -389,6 +378,7 @@ export default {
         padding: 0px 2px;
         gap: 8px;
         cursor: pointer;
+        position: relative;
         & > p {
             @include main.text-main();
             color: main.$text-sub-500;
@@ -418,13 +408,12 @@ export default {
 
     .arrow-icon {
         position: absolute;
-        right: 24px;
+        right: 16px;
     }
 
     .selected-icon {
         position: absolute;
         left: 0;
-    
     }
 
     .selected, .small {
@@ -442,7 +431,6 @@ export default {
     }
 
     .sidebar-container-footer {
-        position: fixed;
-        bottom: 0;
+
     }
 </style>

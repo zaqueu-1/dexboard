@@ -25,7 +25,7 @@
                 <p>Status</p>
                 <p></p>
             </div>
-            <div v-if="loadTeachers" class="courses-general-app-body" v-for="teacher in filteredTeachers" :key="teacher.id">
+            <div v-if="loadTeachers" class="courses-general-app-body" v-for="(teacher,index) in filteredTeachers" :key="index">
                 <div>
                     <IconUserLena v-if="teacher.name == 'Lena Müller'" /> 
                     <IconUserNuray v-if="teacher.name == 'Nuray Aksoy'" /> 
