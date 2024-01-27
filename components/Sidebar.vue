@@ -429,8 +429,4 @@ export default {
         margin-left: 1rem;
         padding: 0;
     }
-
-    .sidebar-container-footer {
-
-    }
 </style>
