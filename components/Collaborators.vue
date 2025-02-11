@@ -5,20 +5,20 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 1.65002L15.8034 7.21472L22.2717 9.11282L18.1542 14.4498L18.3477 21.1872L12 18.921L5.65227 21.1872L5.84577 14.4498L1.72827 9.11282L8.19657 7.21472L12 1.65002ZM12 4.83962L9.31977 8.76183L4.76127 10.0983L7.66377 13.8585L7.52607 18.606L12 17.0094L16.473 18.606L16.3362 13.8585L19.2378 10.0983L14.6802 8.76183L12 4.83962ZM10.2 12C10.2 12.4774 10.3896 12.9353 10.7272 13.2728C11.0647 13.6104 11.5226 13.8 12 13.8C12.4774 13.8 12.9352 13.6104 13.2728 13.2728C13.6103 12.9353 13.8 12.4774 13.8 12H15.6C15.6 12.9548 15.2207 13.8705 14.5456 14.5456C13.8704 15.2207 12.9548 15.6 12 15.6C11.0452 15.6 10.1295 15.2207 9.45439 14.5456C8.77926 13.8705 8.39997 12.9548 8.39997 12H10.2Z" fill="#525866"/>
                 </svg>
-                <p>Destaque colaboradores</p>
+                <p>Our collaborators</p>
             </div>
             <div v-if="option != ''" @click="handleComment" class="send-btn">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.75 11.5H9.25C8.0197 11.4995 6.81267 11.8354 5.75941 12.4712C4.70614 13.107 3.8467 14.0186 3.274 15.1075C3.2579 14.9054 3.2499 14.7027 3.25 14.5C3.25 10.3577 6.60775 7 10.75 7V2.875L18.625 9.25L10.75 15.625V11.5ZM9.25 10H12.25V12.481L16.2408 9.25L12.25 6.019V8.5H10.75C9.88769 8.49903 9.03535 8.68436 8.25129 9.04332C7.46724 9.40227 6.76999 9.92637 6.20725 10.5798C7.17574 10.1959 8.20822 9.99919 9.25 10Z" fill="#525866"/>
                 </svg>
-                <p>Enviar</p>
+                <p>Send</p>
             </div>
         </div>
         <div class="collab-app">
             <div class="collab-app-header">
-                <p @click="handleOption('geral')" :style="option == 'geral' ? 'height:28px;background:white;padding:0 2px;color:#0A0D14' : ''">Geral</p>
-                <p @click="handleOption('comentários')" :style="option == 'comentários' ? 'height:28px;background:white;padding:0 2px;color:#0A0D14' : ''">Comentários</p>
-                <p @click="handleOption('prêmios')" :style="option == 'prêmios' ? 'height:28px;background:white;padding:0 2px;color:#0A0D14' : ''">Prêmios</p>
+                <p @click="handleOption('geral')" :style="option == 'geral' ? 'height:28px;background:white;padding:0 2px;color:#0A0D14' : ''">General</p>
+                <p @click="handleOption('comentários')" :style="option == 'comentários' ? 'height:28px;background:white;padding:0 2px;color:#0A0D14' : ''">Comments</p>
+                <p @click="handleOption('prêmios')" :style="option == 'prêmios' ? 'height:28px;background:white;padding:0 2px;color:#0A0D14' : ''">Prizes</p>
             </div>
             <div v-if="option == 'geral'" class="collab-app-body-general">
                 <p>{{ collab.name }}</p>
@@ -55,14 +55,14 @@
                 </div>
             </div>
             <div v-if="option == 'prêmios'" class="collab-app-body-general">
-                <p>Cartão presente de R$ 50,00</p>
-                <p>Aproveite o prêmio, {{ collab.name.slice(0,7) }}!</p>
+                <p>Gift card of $50</p>
+                <p>Enjoy the prize, {{ collab.name.slice(0,7) }}!</p>
                 <IconPrizes />
-                <p>Os funcionários do mês recebem recompensas</p>
+                <p>Employees of the month receive rewards</p>
             </div>
             <div v-if="option == ''" class="collab-app-no-body">
                 <IconNoCollabs />
-                <p>Sem registros do destaque do funcionário ainda. Por favor, verifique mais tarde.</p>
+                <p>No records of employee highlight yet. Please check later.</p>
             </div>
         </div>
     </div>
