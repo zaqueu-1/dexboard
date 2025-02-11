@@ -1,52 +1,109 @@
-![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
+# Dexboard - Modern Dashboard
 
-## Dashboard | Teste Técnico
-Este projeto se trata de um desafio técnico em Vue.js e foi desenvolvido com base em requisitos pré-estabelecidos pela empresa idealizadora. Ele foi construído utilizando as seguintes tecnologias, conforme a própria documentação do desafio:
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D) ![Nuxtjs](https://img.shields.io/badge/Nuxt-002E3B?style=for-the-badge&logo=nuxtdotjs&logoColor=#00DC82) ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
 
-![Nuxtjs](https://img.shields.io/badge/Nuxt-002E3B?style=for-the-badge&logo=nuxtdotjs&logoColor=#00DC82)
+A modern and responsive dashboard interface built with Vue 3 and SCSS. Originally started as a frontend challenge, it evolved into a portfolio project showcasing modern web development practices and UI/UX design principles.
 
-![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
+## 🌐 Live Demo
 
-## Deploy
-https://frontend-case-nu.vercel.app/
+[View Demo](https://frontend-case-nu.vercel.app/)
 
-## Instalação de dependências
-Certifique-se de ter o Node instalado em sua máquina. Clone o repositório e, no diretório do projeto, execute um dos seguintes comandos pelo terminal, de acordo com o gerenciador de pacotes de sua preferência:
+## 🚀 Features
+
+### Interactive Components
+
+- **Time Tracker**: Functional stopwatch with stop, pause, resume, and start options. Recordings are saved and displayed at the top of 'Previous Tasks'
+- **Daily Hours**: Visual representation of daily activity
+- **Course Progress**: Track learning progress with interactive elements
+- **Team Collaboration**: Like/unlike comments and add new comments as the current user
+- **Course Management**: Search courses by name and view all courses
+- **Daily Feedback**: Choose mood and add comments
+
+## 🛠️ Tech Stack
+
+- Vue 3 (Composition API)
+- Nuxt.js
+- SCSS/SASS
+- JavaScript (ES6+)
+- Modern CSS Features
+- Responsive Design
+
+## 🏃‍♂️ Getting Started
+
+### Prerequisites
+
+- Node.js (v14.0.0 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+
 ```bash
-  npm install
+git clone https://github.com/zaqueu-1/dexboard.git
+cd dexboard
 ```
+
+2. Install dependencies
+
 ```bash
-  yarn install
+npm install
+# or
+yarn install
 ```
-    
-## Rodando o Ambiente de Desenvolvimento
-Para iniciar a aplicação em modo de desenvolvimento, utilize um dos comandos a seguir:
+
+3. Start the development server
+
 ```bash
-  npm run dev
+npm run dev
+# or
+yarn dev
 ```
-```bash
-  yarn dev
+
+Then open http://localhost:3000 in your browser.
+
+## 📁 Project Structure
+
 ```
-Em seguida, abra seu navegador e acesse http://localhost:3000
+dexboard/
+├── components/
+│   ├── icons/        # SVG icons components
+│   ├── emojis/       # Emoji components
+│   └── ...           # Main components
+├── assets/
+│   └── scss/         # SCSS styles
+├── pages/            # Vue pages
+└── public/           # Static assets
+```
 
+### Component Architecture
 
-## Estrutura do Projeto
-Abaixo, algumas informações sobre minhas escolhas e tomadas de decisão durante o andamento do projeto:
+- Components are properly isolated and receive props from the index
+- SVG elements are componentized for better code readability
+- Dynamic loading of components
+- Interactive features in each component
 
-* Elementos SVG que ocupariam linhas e dificultariam a legibilidade do código foram componentizados e movidos para as pastas /icons e /emojis em /components
-* Todos os componentes do projeto encontram-se devidamente isolados, recebendo props vindas do index, garantindo assim que sejam carregados dinamicamente
-* Adicionei o máximo possível de interatividade aos componentes, dado meu tempo disponível para o desafio:
-    - Rastreador de Tempo: cronômetro funcional, com opções de parar, pausar, retomar e iniciar. Ao parar uma gravação, a mesma é registrada e aparece no topo das 'Tarefas Anteriores'
-    - Horas diárias: poderia fazer um preenchimento dinâmico das barrinhas em CSS, mas me tomaria tempo desnecessariamente. O botão de exibir detalhes apenas imprime no console o ato de clique
-    - Cursos - Progresso: novamente, um preenchimento dinâmico aqui me tomaria tempo, portanto, apenas criei funções para imprimir no console ao clicar nos botões
-    - Destaque Colaboradores: na aba de 'Comentários' é possível curtir ou descurtir os comentários. Também é possível adicionar um comentário com o usuário atual, que ficará exibido no topo da lista
-    - Cursos: o campo de pesquisa irá filtrar pelo nome do curso. O clique no botão irá imprimir na tela que o usuário deseja visualizar todos os cursos
-    - Feedback diário: é possível escolher um mood e adicionar um comentário
+## 🎨 Key Components
 
-## Considerações finais
-Utilizar tanto o Nuxt quanto o SASS foi uma experiência nova para mim, com algumas nuances que diferem da stack que utilizo no trabalho (Vue + Quasar). Fiquei positivamente surpreso pela facilidade com que consegui desenvolver o projeto com apenas algumas lidas na documentação oficial; com certeza é um combo que eu terei todo prazer em usar mais vezes. 
-    
-## Autor
-- [@zaqueu-1](https://www.github.com/zaqueu-1)
-Acesse também meu [LinkedIn](https://linkedin.com/in/zaqueu1) e dê uma olhada em meu [portfolio](https://zaqueu.tech)!
+- **TimeTracker**:
+  - Functional stopwatch
+  - Task recording and history
+- **DailyHours**:
+  - Activity visualization
+  - Details view
+- **CoursesProgress**:
+  - Progress tracking
+  - Interactive buttons
+- **Collaborators**:
+  - Comment system
+  - Like/unlike functionality
+- **CoursesGeneral**:
+  - Course search
+  - Course listing
+- **Feedback**:
+  - Mood selection
+  - Comment submission
 
+## 📝 Notes
+
+This project was an exciting opportunity to work with Nuxt and SASS, offering a different experience from my usual stack (Vue + Quasar). The ease of development with just some documentation reading was impressive, making it a combination I look forward to using more in the future.
