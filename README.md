@@ -6,7 +6,7 @@ A modern and responsive dashboard interface built with Vue 3 and SCSS. Originall
 
 ## 🌐 Live Demo
 
-[View Demo](https://frontend-case-nu.vercel.app/)
+[View Demo](https://dexboard-kappa.vercel.app/)
 
 ## 🚀 Features
 
